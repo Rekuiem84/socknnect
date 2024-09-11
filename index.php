@@ -14,12 +14,12 @@
 
 <body>
   <?php
-  $page = 'accueil';
+  $page = "accueil";
   include "./include/header.php"
   ?>
-  <main>
-    
-  </main>
+  <?php
+  include "./include/main.php"
+  ?>
   <?php
   include "./include/footer.php"
   ?>

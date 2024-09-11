@@ -16,38 +16,26 @@ nav img {
   align-items: center;
   gap: 16rem;
 }
-.main-card .card-connexion {
+.main-card a {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 20rem;
   height: 20rem;
   border: 10px solid #262525;
-  box-shadow: 2.5rem 1rem 0 #262525;
-}
-.main-card .card-connexion a {
   color: #1e1e1e;
   font-size: 2.5rem;
   text-transform: uppercase;
   list-style: none;
   text-decoration: none;
+  transition: box-shadow 0.3s ease;
 }
+.main-card a:hover {
+  box-shadow: 2.5rem 2.5rem 0 #262525;
+}
+.main-card .card-connexion,
 .main-card .card-inscription {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 20rem;
-  height: 20rem;
-  border: 10px solid #262525;
-  box-shadow: 2.5rem 1rem 0 #262525;
-}
-.main-card .card-inscription a {
-  color: #1e1e1e;
-  font-size: 2.5rem;
-  text-transform: uppercase;
-  list-style: none;
-  list-style: none;
-  text-decoration: none;
+  cursor: pointer;
 }
 
 footer {

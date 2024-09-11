@@ -1,23 +1,7 @@
 <?php
-require "../assets/classes/Db.php";
-require "../assets/classes/Form.php";
-require "../assets/classes/Login.php";
-
-session_start();
-
-if ($_SESSION["is_connected"]) :
-
-  if (isset($_POST["deconnexion"])) {
-    session_destroy();
-    header("Location: index.php");
-  }
-  if (!$_SESSION["is_admin"]) {
-    header("Location: dashboard_Representations.php");
-  }
-
-  $form = new Form;
-  $params = [];
-  $errors = [];
+require "./assets/classes/Db.php";
+require "./assets/classes/Form.php";
+require "./assets/classes/Login.php";
 ?>
 
   <!DOCTYPE html>
@@ -48,8 +32,3 @@ if ($_SESSION["is_connected"]) :
   </body>
 
   </html>
-<?php
-else :
-  header("Location: index.php");
-endif;
-?>

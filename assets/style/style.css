@@ -1,14 +1,6 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
-  color: #333;
-  margin: 0;
-  padding: 0;
-}
-
 header {
-  background-color: #333;
-  color: #fff;
+  background-color: #efd9da;
+  color: #000000;
   padding: 20px;
   text-align: center;
 }
@@ -21,18 +13,78 @@ header nav ul li {
   margin: 0 10px;
 }
 header nav ul li a {
-  color: #fff;
+  color: #000000;
   text-decoration: none;
 }
 
 footer {
-  background-color: #333;
-  color: #fff;
+  background-color: #efd9da;
+  color: #000000;
   text-align: center;
   padding: 10px 0;
   position: fixed;
   bottom: 0;
   width: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #efd9da;
+  color: #000000;
+  margin: 0;
+  padding: 0;
+}
+
+.form-cont {
+  width: min(100%, 480px);
+  margin-inline: auto;
+}
+
+.bg-accent-1 {
+  background: #fdeddd;
+}
+
+.bg-accent-2 {
+  background: #f3e7e7;
+}
+
+.window {
+  box-shadow: 2.5rem 1rem 0 #000000;
+  border: 10px solid #000000;
+}
+.window > :first-child {
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: center;
+}
+.window form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.window .input-cont {
+  position: relative;
+}
+.window label {
+  position: absolute;
+}
+.window input {
+  background: none;
+  border: 3px solid transparent;
+  border-bottom-color: #000000;
+}
+.window input:focus {
+  outline: none;
+  border-color: #000000;
 }
 
 /*# sourceMappingURL=style.css.map */

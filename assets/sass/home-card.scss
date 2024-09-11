@@ -1,0 +1,40 @@
+.main-card {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16rem;
+    .card-connexion {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20rem;
+        height: 20rem;
+        border: 10px solid $bg-footer;
+        box-shadow: 2.5rem 1rem 0 $bg-footer;
+        a {
+            color: $main-font-color;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            list-style: none;
+            text-decoration: none;
+        }
+    }
+    .card-inscription {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 20rem;
+        height: 20rem;
+        border: 10px solid $bg-footer;
+        box-shadow: 2.5rem 1rem 0 $bg-footer;
+        a {
+            color: $main-font-color;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            list-style: none;
+            list-style: none;
+            text-decoration: none;
+        }
+    }
+}

@@ -1,3 +1,18 @@
+<!-- Page login -->
+<?php
+require "../assets/classes/Db.php";
+require "../assets/classes/Form.php";
+require "../assets/classes/Login.php";
+
+session_start();
+
+$form = new Form;
+$login = new Login;
+$params = [];
+$errors = [];
+$message = "";
+
+?>
 <!DOCTYPE html>
 <html lang='fr'>
 
@@ -14,6 +29,28 @@
 
 <body>
   <?php
+  if ($form->isSubmitted()) {
+    if ($form->isValidLoginForm($params)) {
+      $email = $_POST["email"];
+      $mdp = $_POST["password"];
+      if ($login->checkAccess($email, $mdp)) {
+        $userData = $form->getUserData($email)[0];
+        // ajouter un array avec toutes les infos du man avec une fonction de membre
+        $_SESSION["is_connected"] = true;
+        $_SESSION["membre_id"] = $userData["id"];
+        $_SESSION["nom"] = $userData["nom"];
+        $_SESSION["email"] = $userData["email"];
+        $login->connect();
+      } else {
+        $message = "Email ou mot de passe incorrect";
+      }
+    } else {
+      $errors = $form->getErrors();
+    }
+  }
+  ?>
+
+  <?php
   $page = "login";
   include "../include/header.php" ?>
   <main>
@@ -21,12 +58,12 @@
       <h1>Connexion</h1>
       <form method="post">
         <div class="input-cont">
-          <label for="email">Adresse email</label>
-          <input type="email" name="email" id="email" required>
+          <label for="email"></label>
+          <input type="email" name="email" id="email" placeholder="email" required>
         </div>
         <div class="input-cont">
-          <label for="password">Mot de passe</label>
-          <input type="password" name="password" id="password" required>
+          <label for="password"></label>
+          <input type="password" name="password" id="password" placeholder="mdp" required>
         </div>
         <button type="submit">Sock in !</button>
       </form>

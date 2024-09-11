@@ -58,14 +58,14 @@ $message = "";
       <h1>Connexion</h1>
       <form method="post">
         <div class="input-cont">
-          <label for="email"></label>
+          <label for="email">Email</label>
           <input type="email" name="email" id="email" placeholder="email" required>
         </div>
         <div class="input-cont">
-          <label for="password"></label>
-          <input type="password" name="password" id="password" placeholder="mdp" required>
+          <label for="password">Mot de passe</label>
+          <input type="password" name="password" id="password" placeholder="mot de passe" required>
         </div>
-        <button type="submit">Sock in !</button>
+        <button class="btn-submit type="submit">Sock in !</button>
       </form>
     </div>
 

@@ -1,6 +1,7 @@
 $bg-color: #efd9da;
 $bg-footer: #262525;
 $main-font-color: #1e1e1e;
+$secondary-font-color: #ffffff;
 
 $accent-color-1: #fdeddd;
 $accent-color-2: #f3e7e7;
@@ -27,6 +28,9 @@ body {
 .form-cont {
     width: min(100%, 480px);
     margin-inline: auto;
+    padding: 2rem;
+    @media (max-width: 768px) {
+    }
 }
 
 .bg-accent-1 {
@@ -38,12 +42,15 @@ body {
 .window {
     border: 10px solid $bg-footer;
     transition: box-shadow 0.3s ease;
-
+    &:hover {
+        box-shadow: 2.5rem 2.5rem 0 $bg-footer;
+    }
     & > :first-child {
         font-size: 2.5rem;
         text-transform: uppercase;
         font-weight: 700;
         text-align: center;
+        margin-bottom: 2rem;
     }
     form {
         display: flex;
@@ -51,22 +58,78 @@ body {
         gap: 2rem;
     }
     .input-cont {
-        position: relative;
+        display: flex;
+        flex-direction: row;
     }
     label {
-        position: absolute;
+        display: none;
+    }
+    .label-photo {
+        cursor: pointer;
+        font-size: 0.8rem;
+        display: block;
+        background: $bg-footer;
+        color: $secondary-font-color;
+        text-transform: uppercase;
+        padding: 1rem;
     }
     input {
         background: none;
         border: 3px solid transparent;
         border-bottom-color: black;
-
         &:focus {
             outline: none;
             border-color: black;
         }
     }
-    &:hover {
-        box-shadow: 2.5rem 2.5rem 0 $bg-footer;
+    .btn-submit {
+        background: $bg-footer;
+        color: $secondary-font-color;
+        text-transform: uppercase;
+        border: 2px solid transparent;
+        padding: 1rem;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
+        &:hover {
+            background: $accent-color-1;
+            color: $main-font-color;
+            border: 2px solid #1e1e1e;
+        }
     }
+}
+
+input[type="file"] {
+    display: none; /* Cache l'input type file */
+}
+
+.file-label {
+    display: inline-block;
+    background: #333;
+    color: white;
+    font-size: 1rem;
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    text-transform: uppercase;
+    transition: background 0.3s;
+}
+
+.file-label:hover {
+    background: #555;
+}
+
+.image-preview {
+    width: 15rem;
+    height: 10rem;
+    border: 2px dashed #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-preview img {
+    max-width: 100%;
+    max-height: 100%;
+    display: none;
 }

@@ -22,41 +22,66 @@
       <form method="post">
       <div class="input-cont">
           <label for="nom">Pseudo</label>
-          <input type="text" name="nom" id="nom" required>
+          <input type="text" name="nom" id="nom" placeholder="Pseudo" required>
         </div>
         <div class="input-cont">
           <label for="password">Mot de passe</label>
-          <input type="password" name="password" id="password" required>
+          <input type="password" name="password" id="password" placeholder="Mot de passe" required>
         </div>
         <div class="input-cont">
           <label for="couleur">Couleur</label>
-          <input type="text" name="couleur" id="couleur" required>
+          <input type="text" name="couleur" id="couleur" placeholder="Couleur" required>
         </div>
         <div class="input-cont">
           <label for="taille">Taille</label>
-          <input type="text" name="taille" id="taille" required>
+          <input type="text" name="taille" id="taille" placeholder="Taille" required>
         </div>
         <div class="input-cont">
           <label for="matiere">Matière</label>
-          <input type="text" name="matiere" id="matiere" required>
+          <input type="text" name="matiere" id="matiere" placeholder="Matière" required>
         </div>
         <div class="input-cont">
           <label for="motif">Motif</label>
-          <input type="text" name="motif" id="motif">
+          <input type="text" name="motif" id="motif" placeholder="Motif">
         </div>
         <div class="input-cont">
-          <label for="photo">Photo</label>
-          <input type="file" name="photo" id="photo" required>
-        </div>
+    <label class="label-photo" for="photo">Télécharger une photo</label>
+    <div class="custom-file">
+      <input type="file" id="photo" name="photo" accept="image/*" required>
+      <label for="photo" class="file-label">Choisir une photo</label>
+    </div>
+  </div>
+  <!-- Placeholder pour l'aperçu de l'image -->
+  <div class="image-preview">
+    <img src="" alt="Prévisualisation de l'image" id="imagePreview">
+  </div>
         <div class="input-cont">
           <label for="email">Adresse email</label>
           <input type="email" name="email" id="email" required>
         </div>
-        <button type="submit">Créer mon compte</button>
+        <button class="btn-submit" type="submit">Créer mon compte</button>
       </form>
     </div>
 
   </main>
+
+  <!-- JavaScript pour la prévisualisation de l'image -->
+  <script>
+        const photoInput = document.getElementById('photo');
+        const imagePreview = document.getElementById('imagePreview');
+
+        photoInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    imagePreview.setAttribute('src', event.target.result);
+                    imagePreview.style.display = 'block';
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 </body>
 
 </html>

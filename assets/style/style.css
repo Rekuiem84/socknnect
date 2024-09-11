@@ -16,6 +16,12 @@ nav img {
   align-items: center;
   gap: 16rem;
 }
+@media (max-width: 1024px) {
+  .main-card {
+    flex-direction: column;
+    gap: 6rem;
+  }
+}
 .main-card > :first-child {
   background-color: #fdeddd;
 }
@@ -35,6 +41,13 @@ nav img {
 }
 .main-card a:hover {
   box-shadow: 2.5rem 2.5rem 0 #262525;
+}
+@media (max-width: 1024px) {
+  .main-card a {
+    width: 10rem;
+    height: 10rem;
+    font-size: 1rem;
+  }
 }
 .main-card .card-connexion,
 .main-card .card-inscription {

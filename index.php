@@ -14,9 +14,12 @@
 
 <body>
   <?php
+  $page = 'accueil';
   include "./include/header.php"
   ?>
-  <main></main>
+  <main>
+    
+  </main>
   <?php
   include "./include/footer.php"
   ?>

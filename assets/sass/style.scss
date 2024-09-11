@@ -11,57 +11,57 @@ $font-stack: Arial, sans-serif;
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
 }
 
 body {
-    font-family: $font-stack;
-    background-color: $bg-color;
-    margin: 0;
-    padding: 0;
+	font-family: $font-stack;
+	background-color: $bg-color;
+	margin: 0;
+	padding: 0;
 }
 .form-cont {
-    width: min(100%, 480px);
-    margin-inline: auto;
+	width: min(100%, 480px);
+	margin-inline: auto;
 }
 
 .bg-accent-1 {
-    background: $accent-color-1;
+	background: $accent-color-1;
 }
 .bg-accent-2 {
-    background: $accent-color-2;
+	background: $accent-color-2;
 }
 .window {
-    box-shadow: 2.5rem 1rem 0 $bg-color;
-    border: 10px solid $bg-color;
+	box-shadow: 2.5rem 1rem 0 $bg-footer;
+	border: 10px solid $bg-footer;
 
-    & > :first-child {
-        font-size: 2.5rem;
-        text-transform: uppercase;
-        font-weight: 700;
-        text-align: center;
-    }
-    form {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-    }
-    .input-cont {
-        position: relative;
-    }
-    label {
-        position: absolute;
-    }
-    input {
-        background: none;
-        border: 3px solid transparent;
-        border-bottom-color: black;
+	& > :first-child {
+		font-size: 2.5rem;
+		text-transform: uppercase;
+		font-weight: 700;
+		text-align: center;
+	}
+	form {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
+	.input-cont {
+		position: relative;
+	}
+	label {
+		position: absolute;
+	}
+	input {
+		background: none;
+		border: 3px solid transparent;
+		border-bottom-color: black;
 
-        &:focus {
-            outline: none;
-            border-color: black;
-        }
-    }
+		&:focus {
+			outline: none;
+			border-color: black;
+		}
+	}
 }

@@ -39,7 +39,7 @@ class Login
         $db = new Db;
         $co = $db->dbCo("socknnect", "root", "root");
 
-        $sql = "SELECT `email`, SHA1(`password`) `password` FROM `membre` WHERE email = ? AND password = ?";
+        $sql = "SELECT `email`, SHA1(`password`) `password` FROM `user` WHERE email = ? AND password = ?";
         $param = [$email, sha1($mdp)];
         $result = $db->SQLWithParam($sql, $param, $co);
         return !empty($result);

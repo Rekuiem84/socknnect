@@ -53,8 +53,8 @@ body {
 }
 
 .window {
-  box-shadow: 2.5rem 1rem 0 #efd9da;
-  border: 10px solid #efd9da;
+  box-shadow: 2.5rem 1rem 0 #262525;
+  border: 10px solid #262525;
 }
 .window > :first-child {
   font-size: 2.5rem;

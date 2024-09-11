@@ -50,12 +50,12 @@ class Form
         return $errors;
     }
 
-    public function isValidMembre()
+    public function isValidUser()
     {
         return (!empty($_POST["prenom"]) && !empty($_POST["nom"]) && !empty($_POST["email"]) && !empty($_POST["password"]));
     }
 
-    public function getErrorsMembre()
+    public function getErrorsUser()
     {
         $errors = [
             "nom" => empty($_POST["nom"]) ? "Merci de renseigner le nom" : "",

@@ -47,6 +47,6 @@ class Login
 
     public function connect()
     {
-        header("Location: ../../pages/welcome.php");
+        header("Location: ./welcome.php");
     }
 }

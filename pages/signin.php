@@ -1,3 +1,16 @@
+<?php
+require "../assets/classes/Db.php";
+require "../assets/classes/Form.php";
+require "../assets/classes/User.php";
+
+$form = new Form;
+$params = [];
+$errors = [];
+$message = "";
+
+?>
+
+
 <!DOCTYPE html>
 <html lang='fr'>
 
@@ -14,6 +27,28 @@
 
 <body>
   <?php
+
+ 
+if ($form->isSubmitted()) {
+  $nom = $_POST["nom"];
+  $email = $_POST["email"];
+  $password = $_POST["password"];
+  $couleur = $_POST["couleur"];
+  $taille = $_POST["taille"];
+  $matiere = $_POST["matiere"];
+  $motif = $_POST["motif"];
+  $photo = $_POST["photo"];
+
+  if ($form->isValidUser()) {
+
+    $user = new user( $nom, $email, $password, $couleur, $taille, $matiere, $motif, $photo);
+
+    $user->insertUser($nom, $email, $password, $couleur, $taille, $matiere, $motif, $photo);
+    header("Location: ");
+  } else {
+    $errors = $form->getErrorsUser();
+  }
+}
   $page = "login";
   include "../include/header.php" ?>
   <main>

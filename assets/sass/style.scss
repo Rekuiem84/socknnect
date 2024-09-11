@@ -1,5 +1,5 @@
-$primary-color: #efd9da;
-$secondary-color: #000000;
+$bg-color: #efd9da;
+$bg-footer: #262525;
 $accent-color-1: #fdeddd;
 $accent-color-2: #f3e7e7;
 $font-stack: Arial, sans-serif;
@@ -11,61 +11,60 @@ $font-stack: Arial, sans-serif;
 *,
 *::before,
 *::after {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-	font-family: $font-stack;
-	background-color: $primary-color;
-	color: $secondary-color;
-	margin: 0;
-	padding: 0;
+    font-family: $font-stack;
+    background-color: $bg-color;
+    margin: 0;
+    padding: 0;
 }
 .form-cont {
-	width: min(100%, 480px);
-	margin-inline: auto;
+    width: min(100%, 480px);
+    margin-inline: auto;
 }
 
 form {
 }
 
 .bg-accent-1 {
-	background: $accent-color-1;
+    background: $accent-color-1;
 }
 .bg-accent-2 {
-	background: $accent-color-2;
+    background: $accent-color-2;
 }
 .window {
-	box-shadow: 2.5rem 1rem 0 $secondary-color;
-	border: 10px solid $secondary-color;
+    box-shadow: 2.5rem 1rem 0 $bg-color;
+    border: 10px solid $bg-color;
 
-	& > :first-child {
-		font-size: 2.5rem;
-		text-transform: uppercase;
-		font-weight: 700;
-		text-align: center;
-	}
-	form {
-		display: flex;
-		flex-direction: column;
-		gap: 2rem;
-	}
-	.input-cont {
-		position: relative;
-	}
-	label {
-		position: absolute;
-	}
-	input {
-		background: none;
-		border: 3px solid transparent;
-		border-bottom-color: $secondary-color;
+    & > :first-child {
+        font-size: 2.5rem;
+        text-transform: uppercase;
+        font-weight: 700;
+        text-align: center;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .input-cont {
+        position: relative;
+    }
+    label {
+        position: absolute;
+    }
+    input {
+        background: none;
+        border: 3px solid transparent;
+        border-bottom-color: black;
 
-		&:focus {
-			outline: none;
-			border-color: $secondary-color;
-		}
-	}
+        &:focus {
+            outline: none;
+            border-color: black;
+        }
+    }
 }

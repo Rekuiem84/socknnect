@@ -6,7 +6,7 @@
     npm install sass --save-dev
 ```
 
-### Automatisation du sass lors de chaque sauvegarde
+### Automatisation de sass lors de chaque sauvegarde
 
 ```bash
 sass --watch style.scss style.css

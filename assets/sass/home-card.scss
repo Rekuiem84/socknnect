@@ -5,6 +5,10 @@
     align-items: center;
     gap: 16rem;
 
+    & > :first-child {
+        background-color: #fdeddd;
+    }
+
     a {
         display: flex;
         justify-content: center;

@@ -16,6 +16,9 @@ nav img {
   align-items: center;
   gap: 16rem;
 }
+.main-card > :first-child {
+  background-color: #fdeddd;
+}
 .main-card a {
   display: flex;
   justify-content: center;
@@ -76,8 +79,8 @@ body {
 }
 
 .window {
-  box-shadow: 2.5rem 1rem 0 #262525;
   border: 10px solid #262525;
+  transition: box-shadow 0.3s ease;
 }
 .window > :first-child {
   font-size: 2.5rem;
@@ -104,6 +107,9 @@ body {
 .window input:focus {
   outline: none;
   border-color: black;
+}
+.window:hover {
+  box-shadow: 2.5rem 2.5rem 0 #262525;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -99,7 +99,7 @@ public function __construct($nom, $email, $password, $couleur, $taille, $matiere
     $co = new Db;
     $db = $co->dbCo("socknnect", "root", "root");
  
-    $sql = "INSERT INTO `user` (`nom`,`email`,`password`,`couleur`,`taille`,`matiere`,`motif`,`photo`) VALUES (?,?,?,?,?)";
+    $sql = "INSERT INTO `user` (`nom`,`email`,`password`,`couleur`,`taille`,`matiere`,`motif`,`photo`) VALUES (?,?,?,?,?,?,?,?)";
     $param = [$nom, $email, $password, $couleur, $taille, $matiere, $motif, $photo];
     $co->SQLWithParam($sql, $param, $db);
   }

@@ -28,8 +28,9 @@ $message = "";
 <body>
   <?php
 
- 
+
 if ($form->isSubmitted()) {
+
   $nom = $_POST["nom"];
   $email = $_POST["email"];
   $password = $_POST["password"];
@@ -38,18 +39,19 @@ if ($form->isSubmitted()) {
   $matiere = $_POST["matiere"];
   $motif = $_POST["motif"];
   $photo = $_POST["photo"];
-
+  
   if ($form->isValidUser()) {
-
+    
+    var_dump($form->isValidUser());
     $user = new user( $nom, $email, $password, $couleur, $taille, $matiere, $motif, $photo);
 
     $user->insertUser($nom, $email, $password, $couleur, $taille, $matiere, $motif, $photo);
-    header("Location: ");
+    header("Location: ./login.php?success");
   } else {
     $errors = $form->getErrorsUser();
   }
 }
-  $page = "login";
+  $page = "signin";
   include "../include/header.php" ?>
   <main>
     <div class="bg-accent-1 window form-cont">

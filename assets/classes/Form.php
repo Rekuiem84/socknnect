@@ -45,14 +45,15 @@ class Form
             "taille" => empty($_POST["taille"]) ? "Merci de renseigner la taille" : "",
             "matiere" => empty($_POST["matiere"]) ? "Merci de renseigner la matière" : "",
             "motif" => empty($_POST["motif"]) ? "Merci de renseigner le motif" : "",
-            "photo" => empty($_POST["photo"]) ? "Merci de télécharger une photo" : ""
+            "photo" => empty($_POST["photo"]) ? "Merci de télécharger une photo" : "",
+            "email" => empty($_POST["email"]) ? "Merci de renseigner l'email" : "",
         ];
         return $errors;
     }
 
     public function isValidUser()
     {
-        return (!empty($_POST["prenom"]) && !empty($_POST["nom"]) && !empty($_POST["email"]) && !empty($_POST["password"]));
+        return (!empty($_POST["nom"]) && !empty($_POST["email"]) && !empty($_POST["password"]) && !empty($_POST["couleur"]) && !empty($_POST["taille"]) && !empty($_POST["matiere"]) && !empty($_POST["motif"]) && !empty($_POST["photo"]));
     }
 
     public function getErrorsUser()
@@ -60,7 +61,11 @@ class Form
         $errors = [
             "nom" => empty($_POST["nom"]) ? "Merci de renseigner le nom" : "",
             "email" => empty($_POST["email"]) ? "Merci de renseigner l'email" : "",
-            "password" => empty($_POST["password"]) ? "Merci de renseigner le mot de passe" : ""
+            "password" => empty($_POST["password"]) ? "Merci de renseigner le mot de passe" : "",
+            "couleur" => empty($_POST["couleur"]) ? "Merci de renseigner la couleur" : "",
+            "taille" => empty($_POST["taille"]) ? "Merci de renseigner la taille" : "",
+            "matiere" => empty($_POST["matiere"]) ? "Merci de renseigner la matière" : "",
+            "motif" => empty($_POST["motif"]) ? "Merci de renseigner le motif" : "",
         ];
         return $errors;
     }

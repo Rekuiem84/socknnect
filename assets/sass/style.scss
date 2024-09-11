@@ -1,4 +1,4 @@
-$primary-color: #efd9da;
+$bg-color: #efd9da;
 $secondary-color: #000000;
 $accent-color-1: #fdeddd;
 $accent-color-2: #f3e7e7;
@@ -18,7 +18,7 @@ $font-stack: Arial, sans-serif;
 
 body {
 	font-family: $font-stack;
-	background-color: $primary-color;
+	background-color: $bg-color;
 	color: $secondary-color;
 	margin: 0;
 	padding: 0;

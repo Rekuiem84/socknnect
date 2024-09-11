@@ -1,90 +1,18 @@
-nav {
-  background-color: #efd9da;
-  color: #000000;
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-nav img {
-  width: 16rem;
-}
+/* Error: Undefined variable.
+ *   ,
+ * 2 |     background-color: $primary-color;
+ *   |                       ^^^^^^^^^^^^^^
+ *   '
+ *   assets/sass/footer.scss 2:23  @import
+ *   assets/sass/style.scss 9:9    root stylesheet */
 
-.main-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Undefined variable.\a   \2577 \a 2 \2502      background-color: $primary-color;\a   \2502                        ^^^^^^^^^^^^^^\a   \2575 \a   assets/sass/footer.scss 2:23  @import\a   assets/sass/style.scss 9:9    root stylesheet";
 }
-
-footer {
-  background-color: #efd9da;
-  color: #000000;
-  text-align: center;
-  padding: 10px 0;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  font-family: Arial, sans-serif;
-  background-color: #efd9da;
-  color: #000000;
-  margin: 0;
-  padding: 0;
-}
-
-.form-cont {
-  width: min(100%, 480px);
-  margin-inline: auto;
-}
-
-.bg-accent-1 {
-  background: #fdeddd;
-}
-
-.bg-accent-2 {
-  background: #f3e7e7;
-}
-
-.window {
-  box-shadow: 2.5rem 1rem 0 #000000;
-  border: 10px solid #000000;
-}
-.window > :first-child {
-  font-size: 2.5rem;
-  text-transform: uppercase;
-  font-weight: 700;
-  text-align: center;
-}
-.window form {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-.window .input-cont {
-  position: relative;
-}
-.window label {
-  position: absolute;
-  top: 0;
-}
-.window input {
-  background: none;
-  border: 3px solid transparent;
-  border-bottom-color: #000000;
-}
-.window input:focus {
-  outline: none;
-  border-color: #000000;
-}
-
-/*# sourceMappingURL=style.css.map */

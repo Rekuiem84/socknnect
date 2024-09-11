@@ -36,8 +36,8 @@ body {
     background: $accent-color-2;
 }
 .window {
-    box-shadow: 2.5rem 1rem 0 $bg-footer;
     border: 10px solid $bg-footer;
+    transition: box-shadow 0.3s ease;
 
     & > :first-child {
         font-size: 2.5rem;
@@ -65,5 +65,8 @@ body {
             outline: none;
             border-color: black;
         }
+    }
+    &:hover {
+        box-shadow: 2.5rem 2.5rem 0 $bg-footer;
     }
 }

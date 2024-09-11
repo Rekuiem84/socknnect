@@ -29,6 +29,7 @@ nav img {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #ffffff;
   width: 20rem;
   height: 20rem;
   border: 10px solid #262525;
@@ -132,6 +133,19 @@ body {
   color: #ffffff;
   text-transform: uppercase;
   padding: 1rem;
+  background: #262525;
+  color: #ffffff;
+  text-transform: uppercase;
+  border: 2px solid transparent;
+  padding: 1rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
+}
+.window .label-photo:hover {
+  background: #fdeddd;
+  color: #1e1e1e;
+  border: 2px solid #1e1e1e;
 }
 .window input {
   background: none;

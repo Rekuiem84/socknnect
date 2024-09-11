@@ -86,7 +86,7 @@ if ($form->isSubmitted()) {
       <label for="photo" class="file-label">Choisir une photo</label>
     </div>
   </div>
-  <!-- Placeholder pour l'aperçu de l'image -->
+  <!-- Pour l'aperçu de l'image -->
   <div class="image-preview">
     <img src="" alt="Prévisualisation de l'image" id="imagePreview">
   </div>

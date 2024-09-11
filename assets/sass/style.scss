@@ -41,10 +41,7 @@ body {
 }
 .window {
     border: 10px solid $bg-footer;
-    transition: box-shadow 0.3s ease;
-    &:hover {
-        box-shadow: 2.5rem 2.5rem 0 $bg-footer;
-    }
+    box-shadow: 2.5rem 2.5rem 0 $bg-footer;
     & > :first-child {
         font-size: 2.5rem;
         text-transform: uppercase;

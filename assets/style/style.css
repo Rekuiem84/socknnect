@@ -22,14 +22,11 @@ nav img {
     gap: 6rem;
   }
 }
-.main-card > :first-child {
-  background-color: #fdeddd;
-}
 .main-card a {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #ffffff;
+  background-color: #fdeddd;
   width: 20rem;
   height: 20rem;
   border: 10px solid #262525;
@@ -101,9 +98,6 @@ body {
 
 .window {
   border: 10px solid #262525;
-  transition: box-shadow 0.3s ease;
-}
-.window:hover {
   box-shadow: 2.5rem 2.5rem 0 #262525;
 }
 .window > :first-child {

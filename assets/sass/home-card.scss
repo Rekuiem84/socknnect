@@ -9,15 +9,11 @@
         gap: 6rem;
     }
 
-    & > :first-child {
-        background-color: #fdeddd;
-    }
-
     a {
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: $secondary-font-color;
+        background-color: #fdeddd;
         width: 20rem;
         height: 20rem;
         border: 10px solid $bg-footer;

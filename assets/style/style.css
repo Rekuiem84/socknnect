@@ -6,6 +6,15 @@ nav {
   justify-content: center;
   align-items: center;
 }
+nav img {
+  width: 16rem;
+}
+
+.main-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 footer {
   background-color: #efd9da;

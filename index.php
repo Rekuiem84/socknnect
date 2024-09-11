@@ -15,11 +15,22 @@
 <body>
   <?php
   $page = "accueil";
+<<<<<<< HEAD
+  include "./include/header.php"
+  ?>
+  <?php
+  include "./include/main.php"
+  ?>
+  <?php
+  include "./include/footer.php"
+  ?>
+=======
   include "./include/header.php" ?>
   <main>
 
   </main>
   <?php include "./include/footer.php" ?>
+>>>>>>> 18ef7ed3fa012c73723fb62c0099ae1abbc278df
 </body>
 
 </html>

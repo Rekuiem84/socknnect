@@ -1,3 +1,5 @@
 <nav>
-    <img src="../assets/img/logo-socknnect.png" alt="logo socknnect">
+    <div class="logo-cont">
+        <img src="<?= $page != "accueil" ? "." : "" ?>./assets/img/logo.png" alt="logo socknnect">
+    </div>
 </nav>

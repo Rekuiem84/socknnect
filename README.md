@@ -6,7 +6,7 @@
     npm install sass --save-dev
 ```
 
-### Automatisation du saas lors de chaque ctrl S
+### Automatisation du sass lors de chaque sauvegarde
 
 ```bash
 sass --watch style.scss style.css
@@ -16,7 +16,6 @@ sass --watch style.scss style.css
 
 ```bash
 "scripts": {
-        "style:watch": "sass --watch sass/style.scss:assets/style/style.css",
-
-    },
+    "style:watch": "sass --watch sass/style.scss:assets/style/style.css"
+}
 ```

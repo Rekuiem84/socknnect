@@ -2,7 +2,6 @@
 require "./assets/classes/Db.php";
 require "./assets/classes/Form.php";
 require "./assets/classes/Login.php";
-
 ?>
 
 <!DOCTYPE html>

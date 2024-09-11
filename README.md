@@ -12,7 +12,7 @@
 sass --watch style.scss style.css
 ```
 
-### Ajouter le code suivant dans le fichier package.json pour automatiser sass :
+#### Ajouter le code suivant dans le fichier package.json pour automatiser sass :
 
 ```bash
 "scripts": {

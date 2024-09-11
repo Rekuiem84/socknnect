@@ -40,9 +40,8 @@ if ($_SESSION["is_connected"]) :
     include "./include/header.php"
     ?>
     <?php
-    // include "./include/main.php"
+    include "./include/home-card.php"
     ?>
-    <main>Bienvenue</main>
     <?php
     include "./include/footer.php"
     ?>

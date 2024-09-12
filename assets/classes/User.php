@@ -153,6 +153,15 @@ class User
     $param = [$nom, $couleur, $taille, $matiere, $motif, $email, $id];
     $datas = $co->SQLWithParam($sql, $param, $db);
   }
+  // change le nom de la photo de l'utilisateur pour correspondre au nom de la photo téléchargée
+  public function updateUserPhoto($id, $photo)
+  {
+    $co = new Db();
+    $db = $co->dbCo("socknnect", "root", "root");
+    $sql = "UPDATE `user` SET `photo` = ? WHERE `id` = ?";
+    $params = [$photo, $id];
+    $co->SQLWithParam($sql, $params, $db);
+  }
   // selectionne les match qui n'ont pas été vus
   public function getUnseenMatches($id)
   {
@@ -186,23 +195,20 @@ class User
     return $datas;
   }
   // crée une paire de matching
-  public function createPair($user1, $user2)
+  public function createPair($currentUser, $otherUser)
   {
     $co = new Db();
     $db = $co->dbCo("socknnect", "root", "root");
 
-    //check if pair already exists
-    $sql = "SELECT * FROM `matches` WHERE user1=? AND user2=?";
-    $params = [$user1, $user2];
-    $datas = $co->SQLWithParam($sql, $params, $db);
+    // associe le nouvel user à un autre user
+    $sql = "INSERT INTO `matches` (`user`,`other_user`) VALUES (?,?)";
+    $params = [$currentUser, $otherUser];
+    $co->SQLWithParam($sql, $params, $db);
 
-    if (empty($datas)) {
-      $sql = "INSERT INTO `matching` (`user1`,`user2`, `user1_liked`, `user2_liked`) VALUES (?,?, 0, 0)";
-      $params = [$user1, $user2];
-      $co->SQLWithParam($sql, $params, $db);
-    } else {
-      return;
-    }
+    // associe un autre user au nouvel user
+    $sql = "INSERT INTO `matches` (`user`,`other_user`) VALUES (?,?)";
+    $params = [$otherUser, $currentUser];
+    $co->SQLWithParam($sql, $params, $db);
   }
   /**
    * Vérifie si un utilisateur avec l'email donné existe déjà.
@@ -227,7 +233,6 @@ class User
 
     $sql = "UPDATE `matches` SET `like_status`=1 WHERE user=? AND `other_user`=?";
     $params = [$currentUser, $otherUser];
-    var_dump($params);
     $co->SQLWithParam($sql, $params, $db);
   }
   // skip un user
@@ -236,9 +241,8 @@ class User
     $co = new Db();
     $db = $co->dbCo("socknnect", "root", "root");
 
-    $sql = "UPDATE `matches` SET `like_status`=1 WHERE user=? AND `other_user`=?";
+    $sql = "UPDATE `matches` SET `like_status`=0 WHERE user=? AND `other_user`=?";
     $params = [$currentUser, $otherUser];
-    var_dump($params);
     $co->SQLWithParam($sql, $params, $db);
   }
 }

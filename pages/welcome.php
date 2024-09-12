@@ -50,29 +50,29 @@ if ($_SESSION["is_connected"]) :
     $page = "welcome";
     include "../include/header.php";
 
-    // si other users est pas vide
-
     $unseenMatches = $user->getUnseenMatches($id);
 
     foreach ($unseenMatches as $match) {
       $other_user_id = $match["other_user"];
       $other_users[] = $user->getUser($other_user_id);
     }
-    var_dump($other_users);
+    // var_dump($other_users[0][0]["photo"]);
+    if (!empty($other_users)) {
 
-    if ($form->isSubmitted()) {
-      if (isset($_POST["action"])) {
-        $action = $_POST["action"];
-        if ($action == "like") {
-          echo "like";
-          $user->likeUser($id, $other_users[0][0]["id"]);
-        } else {
-          echo "skip";
-          $user->skipUser($id, $other_users[0][0]["id"]);
+      if ($form->isSubmitted()) {
+        if (isset($_POST["action"])) {
+          $action = $_POST["action"];
+          if ($action == "like") {
+            $user->likeUser($id, $other_users[0][0]["id"]);
+          } else {
+            $user->skipUser($id, $other_users[0][0]["id"]);
+          }
+          array_shift($other_users);
         }
-        // array_shift($other_users);
       }
     }
+
+
 
 
     ?>
@@ -84,28 +84,40 @@ if ($_SESSION["is_connected"]) :
       <a href="../pages/profil.php">
         <button>Votre Profil</button>
       </a>
-      <div class="profile-cont window">
-        <div class="img-cont"><img src="../user_photos/sock-3.webp" alt=""></div>
-        <div class="infos-cont">
-          <p class="infos__name"><?= $other_users[0][0]["nom"] ?><span> id: <?= $other_users[0][0]["id"] ?></span></p>
-          <div class="infos-tags">
-            <span class="tag--couleur"><?= $other_users[0][0]["couleur"] ?></span>
-            <span class="tag--taille"><?= $other_users[0][0]["taille"] ?></span>
-            <span class="tag--matiere"><?= $other_users[0][0]["matiere"] ?></span>
-            <span class="tag--motif"><?= $other_users[0][0]["motif"] ?></span>
+      <?php
+      if (!empty($other_users)) :
+      ?>
+        <div class="profile-cont window">
+          <div class="img-cont"><img src="../user_photos/<?= $other_users[0][0]["photo"] ?>" alt=""></div>
+          <div class="infos-cont">
+            <p class="infos__name"><?= $other_users[0][0]["nom"] ?></p>
+            <div class="infos-tags">
+              <span class="tag--couleur"><?= $other_users[0][0]["couleur"] ?></span>
+              <span class="tag--taille"><?= $other_users[0][0]["taille"] ?></span>
+              <span class="tag--matiere"><?= $other_users[0][0]["matiere"] ?></span>
+              <span class="tag--motif"><?= $other_users[0][0]["motif"] ?></span>
+            </div>
+          </div>
+          <div class="actions-cont">
+            <form method="post">
+              <input type="hidden" name="action" value="skip">
+              <button type="submit" class="btn--skip">X</button>
+            </form>
+            <form method="post">
+              <input type="hidden" name="action" value="like">
+              <button type="submit" class="btn--like">O</button>
+            </form>
           </div>
         </div>
-        <div class="actions-cont">
-          <form method="post">
-            <input type="hidden" name="action" value="skip">
-            <button type="submit" class="btn--skip">X</button>
-          </form>
-          <form method="post">
-            <input type="hidden" name="action" value="like">
-            <button type="submit" class="btn--like">O</button>
-          </form>
+      <?php
+      else :
+      ?>
+        <div class="profile-cont window profile-empty">
+          <p>Il n'y a plus de profils à voir, gros charo</p>
         </div>
-      </div>
+      <?php
+      endif;
+      ?>
     </main>
   </body>
 

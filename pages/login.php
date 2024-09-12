@@ -40,6 +40,11 @@ $message = "";
         $_SESSION["membre_id"] = $userData["id"];
         $_SESSION["nom"] = $userData["nom"];
         $_SESSION["email"] = $userData["email"];
+        $_SESSION["couleur"] = $userData["couleur"];
+        $_SESSION["taille"] = $userData["taille"];
+        $_SESSION["matiere"] = $userData["matiere"];
+        $_SESSION["motif"] = $userData["motif"];
+        $_SESSION["photo"] = $userData["photo"];
         $login->connect();
       } else {
         $message = "Email ou mot de passe incorrect";
@@ -54,6 +59,10 @@ $message = "";
   $page = "login";
   include "../include/header.php" ?>
   <main>
+    <?php if (isset($_GET["success"])): ?>
+      <p>Votre compte a bien été créé, vous pouvez maintenant vous connecter</p>
+    <?php endif; ?>
+
     <div class="bg-accent-1 window form-cont">
       <h1>Connexion</h1>
       <form method="post">
@@ -65,7 +74,7 @@ $message = "";
           <label for="password">Mot de passe</label>
           <input type="password" name="password" id="password" placeholder="mot de passe" required>
         </div>
-        <button class="btn-submit type="submit">Sock in !</button>
+        <button class="btn-submit type=" submit">Sock in !</button>
       </form>
     </div>
 

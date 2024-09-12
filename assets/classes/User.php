@@ -124,6 +124,7 @@ class User
       $this->nom = $user["nom"];
       $this->email = $user["email"];
     }
+    return $datas;
   }
 
   public function setUser($id, $nom, $email, $password, $couleur, $taille, $matiere, $motif, $photo)
@@ -149,9 +150,10 @@ class User
     $co = new Db();
     $db = $co->dbCo("socknnect", "root", "root");
 
-    $sql = "SELECT * FROM `user` WHERE id NOT IN (SELECT user2 FROM `matching` WHERE user1=?) AND id!=?";
+    $sql = "SELECT * FROM `matching` WHERE (user1 = ? and user1_liked = 0) or (user2 = ? and user2_liked = 0);";
     $params = [$id, $id];
     $datas = $co->SQLWithParam($sql, $params, $db);
+    return $datas;
   }
   // get l'id du dernier user créé
   public function getLastId()
@@ -192,5 +194,25 @@ class User
     } else {
       return;
     }
+  }
+  // like un user
+  public function likeUser($user1, $user2)
+  {
+    $co = new Db();
+    $db = $co->dbCo("socknnect", "root", "root");
+
+    $sql = "UPDATE `matching` SET `user1_liked`=1 WHERE user1=? AND user2=?";
+    $params = [$user1, $user2];
+    $co->SQLWithParam($sql, $params, $db);
+  }
+  // skip un user
+  public function skipUser($user_id, $other_user_id)
+  {
+    $co = new Db();
+    $db = $co->dbCo("socknnect", "root", "root");
+
+    $sql = "UPDATE `matching` SET `user1_liked`= WHERE user1=? AND user2=?";
+    $params = [$user_id, $other_user_id];
+    $co->SQLWithParam($sql, $params, $db);
   }
 }

@@ -37,7 +37,7 @@ $message = "";
         $userData = $form->getUserData($email)[0];
         // ajouter un array avec toutes les infos du man avec une fonction de membre
         $_SESSION["is_connected"] = true;
-        $_SESSION["membre_id"] = $userData["id"];
+        $_SESSION["id"] = $userData["id"];
         $_SESSION["nom"] = $userData["nom"];
         $_SESSION["email"] = $userData["email"];
         $_SESSION["couleur"] = $userData["couleur"];

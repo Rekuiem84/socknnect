@@ -15,7 +15,7 @@ if ($_SESSION["is_connected"]) :
 
   $nom = $_SESSION["nom"];
   $email = $_SESSION["email"];
-  $id = $_SESSION["membre_id"];
+  $id = $_SESSION["id"];
   $couleur = $_SESSION["couleur"];
   $taille = $_SESSION["taille"];
   $matiere = $_SESSION["matiere"];
@@ -48,7 +48,27 @@ if ($_SESSION["is_connected"]) :
   <body>
     <?php
     $page = "welcome";
-    include "../include/header.php" ?>
+    include "../include/header.php";
+
+    // toutes les paires qui n'ont pas été liké par l'utilisateur
+    $unlikedMatches = $user->getUnlikedUsers($id);
+    foreach ($unlikedMatches as $value) {
+      // tous les utilisateurs qui n'ont pas été liké
+      $unlikedMatchesId[] = $value["id"];
+      $unlikedUsers[] = $value["user1"];
+    }
+
+    foreach ($unlikedUsers as $value) {
+      var_dump($value);
+      var_dump($user->getUser($value));
+      echo "<br>";
+      echo "<br>";
+    }
+
+
+
+
+    ?>
     <main>
       <form method="post" class="deconnexion">
         <input type="hidden" name="deconnexion" value="true">

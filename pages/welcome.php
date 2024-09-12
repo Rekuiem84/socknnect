@@ -72,7 +72,7 @@ if ($_SESSION["is_connected"]) :
     <main>
       <form method="post" class="deconnexion">
         <input type="hidden" name="deconnexion" value="true">
-        <button>Se déconnecter</button>
+        <button id="btn-logout">Se déconnecter</button>
       </form>
       <div class="profile-cont window">
         <div class="img-cont"><img src="../user_photos/sock-3.webp" alt=""></div>

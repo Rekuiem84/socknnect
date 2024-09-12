@@ -59,8 +59,13 @@ $message = "";
   $page = "login";
   include "../include/header.php" ?>
   <main>
+    <!-- Message de succès après inscription -->
     <?php if (isset($_GET["success"])): ?>
       <p>Votre compte a bien été créé, vous pouvez maintenant vous connecter</p>
+    <?php endif; ?>
+    <!-- Message d'erreur de connexion -->
+    <?php if (isset($_GET["error"])): ?>
+      <p>Erreur de connexion, veuillez réessayer</p>
     <?php endif; ?>
 
     <div class="bg-accent-1 window form-cont">

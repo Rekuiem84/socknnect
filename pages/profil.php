@@ -29,16 +29,19 @@ $user->getUser($_SESSION['id']); // Récupérer les informations de l'utilisateu
     <title>Profil de l'utilisateur</title>
 </head>
 <body>
+<form method="post">
+<h2>Profil de <h2> <input id="nom" value="<?= ($_SESSION['nom']); ?>"/>
 
-<h2>Profil de <?= ($_SESSION['nom']); ?></h2>
+    <label for="email">Email : <input id="email" value="<?= ($_SESSION['email']); ?>"/></label>
+    <label for="couleur">Couleur préférée : <input id="couleur" value="<?= ($_SESSION['couleur']); ?>"/></label>
+    <label for="taille">Taille de chaussettes : <input id="taille" value="<?= ($_SESSION['taille']); ?>"/></label>
+    <label for="matiere">Matière préférée : <input id="matiere" value="<?= ($_SESSION['matiere']); ?>"/></label>
+    <label for="motif">Motif préféré : <input id="motif" value="<?= ($_SESSION['motif']); ?>"/></label>
+    <label for="photo">Photo de profil : <img src="../user_photos/sock-1.webp" alt="pdp"></label>
 
-<p><strong>Email : </strong><?= ($_SESSION['email']); ?></p>
-<p><strong>Couleur préférée : </strong><?= ($_SESSION['couleur']); ?></p>
-<p><strong>Taille : </strong><?= ($_SESSION['taille']); ?></p>
-<p><strong>Matière préférée : </strong><?= ($_SESSION['matiere']); ?></p>
-<p><strong>Motif préféré : </strong><?= ($_SESSION['motif']); ?></p>
+    
+</form>
 
-<?php var_dump($_SESSION); ?>
 
 <?php if ($user->getPhoto()): ?>
     <p><strong>Photo de profil : </strong></p>
@@ -46,8 +49,6 @@ $user->getUser($_SESSION['id']); // Récupérer les informations de l'utilisateu
 <?php else: ?>
     <p>Aucune photo de profil.</p>
 <?php endif; ?>
-
-<a href="logout.php">Se déconnecter</a>
 
 </body>
 </html>

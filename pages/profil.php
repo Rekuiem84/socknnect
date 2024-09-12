@@ -10,6 +10,7 @@ if (!isset($_SESSION['is_connected'])) {
 // Inclure les classes nécessaires (supposons que User et Db sont dans des fichiers séparés)
 include_once '../assets/classes/Db.php';
 include_once '../assets/classes/User.php';
+include_once '../assets/classes/Form.php';
 
 // Initialiser la connexion à la base de données et récupérer l'utilisateur connecté
 $co = new Db();
@@ -18,6 +19,8 @@ $db = $co->dbCo("socknnect", "root", "root");
 $user = new User('', '', '', '', '', '', '', ''); // Créer une instance de l'objet User vide
 $user->getUser($_SESSION['id']); // Récupérer les informations de l'utilisateur connecté à partir de la session
 
+$form = new Form();
+$params = [];
 ?>
 
 <!DOCTYPE html>
@@ -30,45 +33,67 @@ $user->getUser($_SESSION['id']); // Récupérer les informations de l'utilisateu
 </head>
 <body>
 <?php
+if ($form->isSubmitted()) {
+
+    $nom = $_POST["nom"];
+    $couleur = $_POST["couleur"];
+    $taille = $_POST["taille"];
+    $matiere = $_POST["matiere"];
+    $motif = $_POST["motif"];
+    $email = $_POST["email"];
+    
+    $params = [$nom, $couleur, $taille, $matiere, $motif, $email, $_SESSION['id']];
+    if ($form->isValidAnyForm($params)) {
+        $user->setUser($nom, $couleur, $taille, $matiere, $motif, $email, $_SESSION['id']);
+        header("Location: ./profil.php?success");
+    } else { echo "Erreur de validation"; }
+    
+}
+
 $page = "profil";
-include "../include/header.php" ?>
+include "../include/header.php";
+if (isset($_GET["success"])){
+echo "<p>Profil mis à jour avec succès</p>";
+}
+?>
+
  <div class="bg-accent-1 window form-cont">
-      <h1>INSCRIPTION</h1>
-      <form method="post">
+      <h1>PROFIL</h1>
+      <form method="POST">
         <div class="input-cont">
           <label for="nom">Pseudo</label>
-          <input id="nom" value="<?= ($_SESSION['nom']); ?>"/>
+          <input placeholder="nom" id="nom" name="nom" value="<?= ($_SESSION['nom']); ?>"/>
         </div>
         <div class="input-cont">
           <label for="couleur">Couleur</label>
-          <input id="couleur" value="<?= ($_SESSION['couleur']); ?>"/>
+          <input placeholder="couleur" id="couleur" name="couleur" value="<?= ($_SESSION['couleur']); ?>"/>
         </div>
         <div class="input-cont">
           <label for="taille">Taille</label>
-          <input id="taille" value="<?= ($_SESSION['taille']); ?>"/>
+          <input placeholder="taille" id="taille" name="taille" value="<?= ($_SESSION['taille']); ?>"/>
         </div>
         <div class="input-cont">
           <label for="matiere">Matière</label>
-          <input id="matiere" value="<?= ($_SESSION['matiere']); ?>"/>
+          <input placeholder="matiere" id="matiere" name="matiere" value="<?= ($_SESSION['matiere']); ?>"/>
         </div>
         <div class="input-cont">
           <label for="motif">Motif</label>
-          <input id="motif" value="<?= ($_SESSION['motif']); ?>"/>
+          <input placeholder="motif" id="motif" name="motif" value="<?= ($_SESSION['motif']); ?>"/>
         </div>
         <div class="input-cont">
           <label for="email">Adresse email</label>
-          <input id="email" value="<?= ($_SESSION['email']); ?>"/>
+          <input placeholder="email" id="email" name="email" value="<?= ($_SESSION['email']); ?>"/>
         </div>
         <!-- Pour l'aperçu de l'image -->
-
+<!-- 
         <div class="img-cont"><img src="../user_photos/sock-3.webp" alt=""></div>
         <div class="input-cont">
           <label class="label-photo" for="photo">Modifier ma photo</label>
           <div class="custom-file">
-            <input type="file" id="photo" name="photo" accept="image/*" required>
+            <input type="file" id="photo" name="photo" accept="image/*" value="<?= ($_SESSION['photo']); ?>">
             <label for="photo" class="file-label">Choisir une photo</label>
           </div>
-        </div>
+        </div> -->
         <button class="btn-submit" type="submit">Modifier mon profil</button>
       </form>
     </div>

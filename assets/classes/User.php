@@ -126,21 +126,20 @@ class User
     }
   }
 
-  public function setUser($id, $nom, $email, $password, $couleur, $taille, $matiere, $motif, $photo)
+  public function setUser($nom, $couleur, $taille, $matiere, $motif, $email, $id)
   {
     $_SESSION["nom"] = $nom;
-    $_SESSION["email"] = $email;
     $_SESSION["couleur"] = $couleur;
     $_SESSION["taille"] = $taille;
     $_SESSION["matiere"] = $matiere;
     $_SESSION["motif"] = $motif;
-    $_SESSION["photo"] = $photo;
+    $_SESSION["email"] = $email;
 
     $co = new Db();
     $db = $co->dbCo("socknnect", "root", "root");
 
-    $sql = "UPDATE `user` SET `nom`=?, `email`=?, `password`=?, `couleur`=?, `taille`=?, `matiere`=?, `motif`=?, `photo`=? WHERE id=?";
-    $param = [$nom, $email, sha1($password), $couleur, $taille, $matiere, $motif, $photo, $id];
+    $sql = "UPDATE `user` SET `nom`=?, `couleur`=?, `taille`=?, `matiere`=?, `motif`=?, `email`=? WHERE id=?";
+    $param = [$nom, $couleur, $taille, $matiere, $motif, $email, $id];
     $datas = $co->SQLWithParam($sql, $param, $db);
   }
   // selectionne les users qui n'ont pas été liké par l'utilisateur connecté

@@ -50,22 +50,29 @@ if ($_SESSION["is_connected"]) :
     $page = "welcome";
     include "../include/header.php";
 
-    // toutes les paires qui n'ont pas été liké par l'utilisateur
-    $unlikedMatches = $user->getUnlikedUsers($id);
-    foreach ($unlikedMatches as $value) {
-      // tous les utilisateurs qui n'ont pas été liké
-      $unlikedMatchesId[] = $value["id"];
-      $unlikedUsers[] = $value["user1"];
+    // si other users est pas vide
+
+    $unseenMatches = $user->getUnseenMatches($id);
+
+    foreach ($unseenMatches as $match) {
+      $other_user_id = $match["other_user"];
+      $other_users[] = $user->getUser($other_user_id);
     }
+    var_dump($other_users);
 
-    foreach ($unlikedUsers as $value) {
-      var_dump($value);
-      var_dump($user->getUser($value));
-      echo "<br>";
-      echo "<br>";
+    if ($form->isSubmitted()) {
+      if (isset($_POST["action"])) {
+        $action = $_POST["action"];
+        if ($action == "like") {
+          echo "like";
+          $user->likeUser($id, $other_users[0][0]["id"]);
+        } else {
+          echo "skip";
+          $user->skipUser($id, $other_users[0][0]["id"]);
+        }
+        // array_shift($other_users);
+      }
     }
-
-
 
 
     ?>
@@ -77,12 +84,12 @@ if ($_SESSION["is_connected"]) :
       <div class="profile-cont window">
         <div class="img-cont"><img src="../user_photos/sock-3.webp" alt=""></div>
         <div class="infos-cont">
-          <p class="infos__name"><?= $_SESSION["nom"] ?></p>
+          <p class="infos__name"><?= $other_users[0][0]["nom"] ?><span> id: <?= $other_users[0][0]["id"] ?></span></p>
           <div class="infos-tags">
-            <span class="tag--couleur"><?= $_SESSION["couleur"] ?></span>
-            <span class="tag--taille"><?= $_SESSION["taille"] ?></span>
-            <span class="tag--matiere"><?= $_SESSION["matiere"] ?></span>
-            <span class="tag--motif"><?= $_SESSION["motif"] ?></span>
+            <span class="tag--couleur"><?= $other_users[0][0]["couleur"] ?></span>
+            <span class="tag--taille"><?= $other_users[0][0]["taille"] ?></span>
+            <span class="tag--matiere"><?= $other_users[0][0]["matiere"] ?></span>
+            <span class="tag--motif"><?= $other_users[0][0]["motif"] ?></span>
           </div>
         </div>
         <div class="actions-cont">

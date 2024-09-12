@@ -143,14 +143,14 @@ class User
     $param = [$nom, $couleur, $taille, $matiere, $motif, $email, $id];
     $datas = $co->SQLWithParam($sql, $param, $db);
   }
-  // selectionne les users qui n'ont pas été liké par l'utilisateur connecté
-  public function getUnlikedUsers($id)
+  // selectionne les match qui n'ont pas été vus
+  public function getUnseenMatches($id)
   {
     $co = new Db();
     $db = $co->dbCo("socknnect", "root", "root");
 
-    $sql = "SELECT * FROM `matching` WHERE (user1 = ? and user1_liked = 0) or (user2 = ? and user2_liked = 0);";
-    $params = [$id, $id];
+    $sql = "SELECT * FROM `matches` WHERE (user = ? and like_status is NULL)";
+    $params = [$id];
     $datas = $co->SQLWithParam($sql, $params, $db);
     return $datas;
   }
@@ -182,7 +182,7 @@ class User
     $db = $co->dbCo("socknnect", "root", "root");
 
     //check if pair already exists
-    $sql = "SELECT * FROM `matching` WHERE user1=? AND user2=?";
+    $sql = "SELECT * FROM `matches` WHERE user1=? AND user2=?";
     $params = [$user1, $user2];
     $datas = $co->SQLWithParam($sql, $params, $db);
 
@@ -195,23 +195,25 @@ class User
     }
   }
   // like un user
-  public function likeUser($user1, $user2)
+  public function likeUser($currentUser, $otherUser)
   {
     $co = new Db();
     $db = $co->dbCo("socknnect", "root", "root");
 
-    $sql = "UPDATE `matching` SET `user1_liked`=1 WHERE user1=? AND user2=?";
-    $params = [$user1, $user2];
+    $sql = "UPDATE `matches` SET `like_status`=1 WHERE user=? AND `other_user`=?";
+    $params = [$currentUser, $otherUser];
+    var_dump($params);
     $co->SQLWithParam($sql, $params, $db);
   }
   // skip un user
-  public function skipUser($user_id, $other_user_id)
+  public function skipUser($currentUser, $otherUser)
   {
     $co = new Db();
     $db = $co->dbCo("socknnect", "root", "root");
 
-    $sql = "UPDATE `matching` SET `user1_liked`= WHERE user1=? AND user2=?";
-    $params = [$user_id, $other_user_id];
+    $sql = "UPDATE `matches` SET `like_status`=1 WHERE user=? AND `other_user`=?";
+    $params = [$currentUser, $otherUser];
+    var_dump($params);
     $co->SQLWithParam($sql, $params, $db);
   }
 }

@@ -59,40 +59,33 @@ include "../include/header.php" ?>
           <label for="email">Adresse email</label>
           <input id="email" value="<?= ($_SESSION['email']); ?>"/>
         </div>
+        <!-- Pour l'aperçu de l'image -->
+
+        <div class="img-cont"><img src="../user_photos/sock-3.webp" alt=""></div>
         <div class="input-cont">
-          <label class="label-photo" for="photo">Télécharger une photo</label>
+          <label class="label-photo" for="photo">Modifier ma photo</label>
           <div class="custom-file">
             <input type="file" id="photo" name="photo" accept="image/*" required>
             <label for="photo" class="file-label">Choisir une photo</label>
           </div>
         </div>
-        <!-- Pour l'aperçu de l'image -->
-        <div class="image-preview">
-          <img src="" alt="Prévisualisation de l'image" id="imagePreview">
-        </div>
         <button class="btn-submit" type="submit">Modifier mon profil</button>
       </form>
     </div>
-<form method="post">
-<h2>Profil de <h2> <input id="nom" value="<?= ($_SESSION['nom']); ?>"/>
-
-    <label for="email">Email : <input id="email" value="<?= ($_SESSION['email']); ?>"/></label>
-    <label for="couleur">Couleur préférée : <input id="couleur" value="<?= ($_SESSION['couleur']); ?>"/></label>
-    <label for="taille">Taille de chaussettes : <input id="taille" value="<?= ($_SESSION['taille']); ?>"/></label>
-    <label for="matiere">Matière préférée : <input id="matiere" value="<?= ($_SESSION['matiere']); ?>"/></label>
-    <label for="motif">Motif préféré : <input id="motif" value="<?= ($_SESSION['motif']); ?>"/></label>
-    <label for="photo">Photo de profil : <img src="../user_photos/sock-1.webp" alt="pdp"></label>
-
-    
-</form>
-
-
-<?php if ($user->getPhoto()): ?>
-    <p><strong>Photo de profil : </strong></p>
-    <img src="uploads/<?= ($_SESSION['photo']); ?>" alt="Photo de profil" width="150">
-<?php else: ?>
-    <p>Aucune photo de profil.</p>
-<?php endif; ?>
-
+</main>
+<script>
+    const image = document.querySelector('.img-cont img');
+    const photoInput = document.getElementById('photo');
+    photoInput.addEventListener('change', function() {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          image.setAttribute('src', event.target.result);
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
 </body>
 </html>

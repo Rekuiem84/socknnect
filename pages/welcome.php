@@ -74,6 +74,9 @@ if ($_SESSION["is_connected"]) :
         <input type="hidden" name="deconnexion" value="true">
         <button>Se déconnecter</button>
       </form>
+      <a href="../pages/profil.php">
+        <button>Votre Profil</button>
+      </a>
       <div class="profile-cont window">
         <div class="img-cont"><img src="../user_photos/sock-3.webp" alt=""></div>
         <div class="infos-cont">

@@ -15,7 +15,7 @@ if ($_SESSION["is_connected"]) :
 
   $nom = $_SESSION["nom"];
   $email = $_SESSION["email"];
-  $id = $_SESSION["membre_id"];
+  $id = $_SESSION["id"];
   $couleur = $_SESSION["couleur"];
   $taille = $_SESSION["taille"];
   $matiere = $_SESSION["matiere"];

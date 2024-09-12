@@ -99,6 +99,16 @@ class User
     $co = new Db;
     $db = $co->dbCo("socknnect", "root", "root");
 
+    // Vérifie si l'email existe déjà
+    $sqlCheck = "SELECT * FROM `user` WHERE email = ?";
+    $paramCheck = [$email];
+    $resultCheck = $co->SQLWithParam($sqlCheck, $paramCheck, $db);
+
+   // Si l'utilisateur existe déjà, renvoie un message d'erreur
+    if (!empty($resultCheck)) {
+        return ["status" => "error", "message" => "Cet email est déjà utilisé."];
+    }
+
     $sql = "INSERT INTO `user` (`nom`,`email`,`password`,`couleur`,`taille`,`matiere`,`motif`,`photo`) VALUES (?,?,?,?,?,?,?,?)";
     $param = [$nom, $email, sha1($password), $couleur, $taille, $matiere, $motif, $photo];
     // si la requête est exécutée, on enregistre la photo dans le dossier
@@ -193,4 +203,19 @@ class User
       return;
     }
   }
+  /**
+     * Vérifie si un utilisateur avec l'email donné existe déjà.
+     * Retourne true si l'email existe, sinon false.
+     */
+    public function emailExists($email)
+    {
+        $co = new Db();
+        $db = $co->dbCo("socknnect", "root", "root");
+
+        $sql = "SELECT COUNT(*) as count FROM `user` WHERE email = ?";
+        $param = [$email];
+        $datas = $co->SQLWithParam($sql, $param, $db);
+
+        return $datas[0]['count'] > 0;
+    }
 }

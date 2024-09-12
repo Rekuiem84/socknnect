@@ -2,22 +2,33 @@
 <?php
 require "../assets/classes/Db.php";
 require "../assets/classes/Form.php";
-require "../assets/classes/Login.php";
+require "../assets/classes/User.php";
 
 session_start();
-
-$form = new Form;
-$login = new Login;
-$params = [];
-$errors = [];
-$message = "";
 
 if ($_SESSION["is_connected"]) :
 
   if (isset($_POST["deconnexion"])) {
     session_destroy();
-    header("Location: ./redirect-index.php");
+    include "./redirect-index.php";
   }
+
+  $nom = $_SESSION["nom"];
+  $email = $_SESSION["email"];
+  $id = $_SESSION["membre_id"];
+  $couleur = $_SESSION["couleur"];
+  $taille = $_SESSION["taille"];
+  $matiere = $_SESSION["matiere"];
+  $motif = $_SESSION["motif"];
+  $photo = $_SESSION["photo"];
+  $password = "";
+
+  $form = new Form;
+  $user = new User($nom, $email, $password, $couleur, $taille, $matiere, $motif, $photo);
+  $params = [];
+  $errors = [];
+  $message = "";
+
 ?>
 
   <!DOCTYPE html>
@@ -39,10 +50,32 @@ if ($_SESSION["is_connected"]) :
     $page = "welcome";
     include "../include/header.php" ?>
     <main>
-      <p>welcome</p>
-      <?php
-      var_dump($_SESSION);
-      ?>
+      <form method="post" class="deconnexion">
+        <input type="hidden" name="deconnexion" value="true">
+        <button>Se déconnecter</button>
+      </form>
+      <div class="profile-cont window">
+        <div class="img-cont"><img src="../user_photos/sock-3.webp" alt=""></div>
+        <div class="infos-cont">
+          <p class="infos__name"><?= $_SESSION["nom"] ?></p>
+          <div class="infos-tags">
+            <span class="tag--couleur"><?= $_SESSION["couleur"] ?></span>
+            <span class="tag--taille"><?= $_SESSION["taille"] ?></span>
+            <span class="tag--matiere"><?= $_SESSION["matiere"] ?></span>
+            <span class="tag--motif"><?= $_SESSION["motif"] ?></span>
+          </div>
+        </div>
+        <div class="actions-cont">
+          <form method="post">
+            <input type="hidden" name="action" value="skip">
+            <button type="submit" class="btn--skip">X</button>
+          </form>
+          <form method="post">
+            <input type="hidden" name="action" value="like">
+            <button type="submit" class="btn--like">O</button>
+          </form>
+        </div>
+      </div>
     </main>
   </body>
 

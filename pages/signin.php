@@ -29,35 +29,41 @@ $message = "";
   <?php
 
 
-if ($form->isSubmitted()) {
+  if ($form->isSubmitted()) {
 
-  $nom = $_POST["nom"];
-  $email = $_POST["email"];
-  $password = $_POST["password"];
-  $couleur = $_POST["couleur"];
-  $taille = $_POST["taille"];
-  $matiere = $_POST["matiere"];
-  $motif = $_POST["motif"];
-  $photo = $_POST["photo"];
-  
-  if ($form->isValidUser()) {
-    
-    var_dump($form->isValidUser());
-    $user = new user( $nom, $email, $password, $couleur, $taille, $matiere, $motif, $photo);
+    $nom = $_POST["nom"];
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+    $couleur = $_POST["couleur"];
+    $taille = $_POST["taille"];
+    $matiere = $_POST["matiere"];
+    $motif = $_POST["motif"];
+    $photo = $_POST["photo"];
 
-    $user->insertUser($nom, $email, $password, $couleur, $taille, $matiere, $motif, $photo);
-    header("Location: ./login.php?success");
-  } else {
-    $errors = $form->getErrorsUser();
+    if ($form->isValidUser()) {
+      $user = new user($nom, $email, $password, $couleur, $taille, $matiere, $motif, $photo);
+
+      $user->insertUser($nom, $email, $password, $couleur, $taille, $matiere, $motif, $photo);
+
+      // Création des paires avec tous les autres utilisateurs
+      $id = $user->getLastId();
+      foreach ($user->getAllIdExceptLast() as $value) {
+        $other_user_id = $value[0];
+        $user->createPair($id, $other_user_id);
+      }
+
+      header("Location: ./login.php?success");
+    } else {
+      $errors = $form->getErrorsUser();
+    }
   }
-}
   $page = "signin";
   include "../include/header.php" ?>
   <main>
     <div class="bg-accent-1 window form-cont">
       <h1>INSCRIPTION</h1>
       <form method="post">
-      <div class="input-cont">
+        <div class="input-cont">
           <label for="nom">Pseudo</label>
           <input type="text" name="nom" id="nom" placeholder="Pseudo" required>
         </div>
@@ -82,19 +88,19 @@ if ($form->isSubmitted()) {
           <input type="text" name="motif" id="motif" placeholder="Motif">
         </div>
         <div class="input-cont">
-    <label class="label-photo" for="photo">Télécharger une photo</label>
-    <div class="custom-file">
-      <input type="file" id="photo" name="photo" accept="image/*" required>
-      <label for="photo" class="file-label">Choisir une photo</label>
-    </div>
-  </div>
-  <!-- Pour l'aperçu de l'image -->
-  <div class="image-preview">
-    <img src="" alt="Prévisualisation de l'image" id="imagePreview">
-  </div>
+          <label class="label-photo" for="photo">Télécharger une photo</label>
+          <div class="custom-file">
+            <input type="file" id="photo" name="photo" accept="image/*" required>
+            <label for="photo" class="file-label">Choisir une photo</label>
+          </div>
+        </div>
+        <!-- Pour l'aperçu de l'image -->
+        <div class="image-preview">
+          <img src="" alt="Prévisualisation de l'image" id="imagePreview">
+        </div>
         <div class="input-cont">
           <label for="email">Adresse email</label>
-          <input type="email" name="email" id="email" required>
+          <input type="email" name="email" id="email" placeholder="email" required>
         </div>
         <button class="btn-submit" type="submit">Créer mon compte</button>
       </form>
@@ -104,21 +110,21 @@ if ($form->isSubmitted()) {
 
   <!-- JavaScript pour la prévisualisation de l'image -->
   <script>
-        const photoInput = document.getElementById('photo');
-        const imagePreview = document.getElementById('imagePreview');
+    const photoInput = document.getElementById('photo');
+    const imagePreview = document.getElementById('imagePreview');
 
-        photoInput.addEventListener('change', function() {
-            const file = this.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(event) {
-                    imagePreview.setAttribute('src', event.target.result);
-                    imagePreview.style.display = 'block';
-                }
-                reader.readAsDataURL(file);
-            }
-        });
-    </script>
+    photoInput.addEventListener('change', function() {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          imagePreview.setAttribute('src', event.target.result);
+          imagePreview.style.display = 'block';
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
 </body>
 
 </html>

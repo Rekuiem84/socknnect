@@ -134,23 +134,23 @@ class User
       $this->nom = $user["nom"];
       $this->email = $user["email"];
     }
+    return $datas;
   }
 
-  public function setUser($id, $nom, $email, $password, $couleur, $taille, $matiere, $motif, $photo)
+  public function setUser($nom, $couleur, $taille, $matiere, $motif, $email, $id)
   {
     $_SESSION["nom"] = $nom;
-    $_SESSION["email"] = $email;
     $_SESSION["couleur"] = $couleur;
     $_SESSION["taille"] = $taille;
     $_SESSION["matiere"] = $matiere;
     $_SESSION["motif"] = $motif;
-    $_SESSION["photo"] = $photo;
+    $_SESSION["email"] = $email;
 
     $co = new Db();
     $db = $co->dbCo("socknnect", "root", "root");
 
-    $sql = "UPDATE `user` SET `nom`=?, `email`=?, `password`=?, `couleur`=?, `taille`=?, `matiere`=?, `motif`=?, `photo`=? WHERE id=?";
-    $param = [$nom, $email, sha1($password), $couleur, $taille, $matiere, $motif, $photo, $id];
+    $sql = "UPDATE `user` SET `nom`=?, `couleur`=?, `taille`=?, `matiere`=?, `motif`=?, `email`=? WHERE id=?";
+    $param = [$nom, $couleur, $taille, $matiere, $motif, $email, $id];
     $datas = $co->SQLWithParam($sql, $param, $db);
   }
   // selectionne les users qui n'ont pas été liké par l'utilisateur connecté
@@ -159,9 +159,10 @@ class User
     $co = new Db();
     $db = $co->dbCo("socknnect", "root", "root");
 
-    $sql = "SELECT * FROM `user` WHERE id NOT IN (SELECT user2 FROM `matching` WHERE user1=?) AND id!=?";
+    $sql = "SELECT * FROM `matching` WHERE (user1 = ? and user1_liked = 0) or (user2 = ? and user2_liked = 0);";
     $params = [$id, $id];
     $datas = $co->SQLWithParam($sql, $params, $db);
+    return $datas;
   }
   // get l'id du dernier user créé
   public function getLastId()

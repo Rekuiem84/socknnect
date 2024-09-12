@@ -26,9 +26,6 @@ require "./assets/classes/Login.php";
   <?php
   include "./include/home-card.php"
   ?>
-  <?php
-  include "./include/footer.php"
-  ?>
 </body>
 
 </html>

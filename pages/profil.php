@@ -53,7 +53,7 @@ if ($form->isSubmitted()) {
 $page = "profil";
 include "../include/header.php";
 if (isset($_GET["success"])){
-echo "<p>Profil mis à jour avec succès</p>";
+echo "<p class='popup'>Profil mis à jour avec succès</p>";
 }
 ?>
 
@@ -111,6 +111,14 @@ echo "<p>Profil mis à jour avec succès</p>";
         reader.readAsDataURL(file);
       }
     });
+
+    // Utilisation de setTimeout pour masquer la popup après 5 secondes
+    setTimeout(() => {
+        const popup = document.querySelector('.popup');
+        if (popup) {
+            popup.style.display = 'none';  // Masque complètement la popup
+        }
+    }, 5000); // 5000 millisecondes = 5 secondes
   </script>
 </body>
 </html>

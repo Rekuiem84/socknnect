@@ -11,8 +11,8 @@ class User
   private $matiere;
   private $motif;
   private $photo;
- 
- 
+
+
   public function getId()
   {
     return $this->id;
@@ -49,7 +49,7 @@ class User
   {
     return $this->photo;
   }
- 
+
   public function setNom($nom)
   {
     $this->nom = $nom;
@@ -62,32 +62,32 @@ class User
   {
     $this->password = $password;
   }
-    public function setCouleur($couleur)
-    {
-        $this->couleur = $couleur;
-    }
-    public function setTaille($taille)
-    {
-        $this->taille = $taille;
-    }
-    public function setMatiere($matiere)
-    {
-        $this->matiere = $matiere;
-    }
-    public function setMotif($motif)
-    {
-        $this->motif = $motif;
-    }
-    public function setPhoto($photo)
-    {
-        $this->photo = $photo;
-    }
+  public function setCouleur($couleur)
+  {
+    $this->couleur = $couleur;
+  }
+  public function setTaille($taille)
+  {
+    $this->taille = $taille;
+  }
+  public function setMatiere($matiere)
+  {
+    $this->matiere = $matiere;
+  }
+  public function setMotif($motif)
+  {
+    $this->motif = $motif;
+  }
+  public function setPhoto($photo)
+  {
+    $this->photo = $photo;
+  }
 
-public function __construct($nom, $email, $password, $couleur, $taille, $matiere, $motif, $photo)
-{
+  public function __construct($nom, $email, $password, $couleur, $taille, $matiere, $motif, $photo)
+  {
     $this->nom = $nom;
     $this->email = $email;
-    $this->password = $password;
+    $this->password = sha1($password);
     $this->couleur = $couleur;
     $this->taille = $taille;
     $this->matiere = $matiere;
@@ -98,48 +98,99 @@ public function __construct($nom, $email, $password, $couleur, $taille, $matiere
   {
     $co = new Db;
     $db = $co->dbCo("socknnect", "root", "root");
- 
+
     $sql = "INSERT INTO `user` (`nom`,`email`,`password`,`couleur`,`taille`,`matiere`,`motif`,`photo`) VALUES (?,?,?,?,?,?,?,?)";
-    $param = [$nom, $email, $password, $couleur, $taille, $matiere, $motif, $photo];
-    $co->SQLWithParam($sql, $param, $db);
+    $param = [$nom, $email, sha1($password), $couleur, $taille, $matiere, $motif, $photo];
+    // si la requête est exécutée, on enregistre la photo dans le dossier
+    if ($co->SQLWithParam($sql, $param, $db)) {
+      $this->savePhotoFile($photo);
+    };
   }
- 
+  public function savePhotoFile($photo) {}
+
   public function getUser($id)
   {
     $co = new Db();
     $db = $co->dbCo("socknnect", "root", "root");
- 
+
     /* Utilisation de la fonction SQLWithParam */
     $sql = "SELECT * FROM `user` where id=?";
     $param = [$id];
     $datas = $co->SQLWithParam($sql, $param, $db);
- 
+
     if (!empty($datas)) {
       $user = $datas[0];
- 
-    $this->nom = $user["nom"];
-    $this->email = $user["email"];
-    }
-}
 
-public function setUser($id, $nom, $email, $password, $couleur, $taille, $matiere, $motif, $photo)
-{
-    $_SESSION["user_nom"] = $nom;
-    $_SESSION["user_email"] = $email;
-    $_SESSION["user_password"] = $password;
-    $_SESSION["user_couleur"] = $couleur;
-    $_SESSION["user_taille"] = $taille;
-    $_SESSION["user_matiere"] = $matiere;
-    $_SESSION["user_motif"] = $motif;
-    $_SESSION["user_photo"] = $photo;
-    
+      $this->nom = $user["nom"];
+      $this->email = $user["email"];
+    }
+  }
+
+  public function setUser($id, $nom, $email, $password, $couleur, $taille, $matiere, $motif, $photo)
+  {
+    $_SESSION["nom"] = $nom;
+    $_SESSION["email"] = $email;
+    $_SESSION["couleur"] = $couleur;
+    $_SESSION["taille"] = $taille;
+    $_SESSION["matiere"] = $matiere;
+    $_SESSION["motif"] = $motif;
+    $_SESSION["photo"] = $photo;
+
     $co = new Db();
     $db = $co->dbCo("socknnect", "root", "root");
 
     $sql = "UPDATE `user` SET `nom`=?, `email`=?, `password`=?, `couleur`=?, `taille`=?, `matiere`=?, `motif`=?, `photo`=? WHERE id=?";
-    $param = [$nom, $email, $password, $couleur, $taille, $matiere, $motif, $photo, $id];
+    $param = [$nom, $email, sha1($password), $couleur, $taille, $matiere, $motif, $photo, $id];
     $datas = $co->SQLWithParam($sql, $param, $db);
-}
-}
+  }
+  // selectionne les users qui n'ont pas été liké par l'utilisateur connecté
+  public function getUnlikedUsers($id)
+  {
+    $co = new Db();
+    $db = $co->dbCo("socknnect", "root", "root");
 
-?>
+    $sql = "SELECT * FROM `user` WHERE id NOT IN (SELECT user2 FROM `matching` WHERE user1=?) AND id!=?";
+    $params = [$id, $id];
+    $datas = $co->SQLWithParam($sql, $params, $db);
+  }
+  // get l'id du dernier user créé
+  public function getLastId()
+  {
+    $co = new Db();
+    $db = $co->dbCo("socknnect", "root", "root");
+
+    $sql = "SELECT MAX(id) FROM `user`";
+    $datas = $co->SQLWithoutParam($sql, $db);
+    var_dump($datas[0]["MAX(id)"]);
+    return $datas[0]["MAX(id)"];
+  }
+  // récupère tous les id sauf le dernier
+  public function getAllIdExceptLast()
+  {
+    $co = new Db();
+    $db = $co->dbCo("socknnect", "root", "root");
+
+    $sql = "SELECT id FROM `user` WHERE id!=(SELECT MAX(id) FROM `user`)";
+    $datas = $co->SQLWithoutParam($sql, $db);
+    return $datas;
+  }
+  // crée une paire de matching
+  public function createPair($user1, $user2)
+  {
+    $co = new Db();
+    $db = $co->dbCo("socknnect", "root", "root");
+
+    //check if pair already exists
+    $sql = "SELECT * FROM `matching` WHERE user1=? AND user2=?";
+    $params = [$user1, $user2];
+    $datas = $co->SQLWithParam($sql, $params, $db);
+
+    if (empty($datas)) {
+      $sql = "INSERT INTO `matching` (`user1`,`user2`, `user1_liked`, `user2_liked`) VALUES (?,?, 0, 0)";
+      $params = [$user1, $user2];
+      $co->SQLWithParam($sql, $params, $db);
+    } else {
+      return;
+    }
+  }
+}

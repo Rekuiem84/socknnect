@@ -245,4 +245,50 @@ class User
     $params = [$currentUser, $otherUser];
     $co->SQLWithParam($sql, $params, $db);
   }
+  // récupère tous les matchs
+  public function getLikedUsers($user)
+  {
+    $co = new Db();
+    $db = $co->dbCo("socknnect", "root", "root");
+
+    $sql = "SELECT * FROM `matches` WHERE user=? AND like_status = 1";
+    $params = [$user];
+    $datas = $co->SQLWithParam($sql, $params, $db);
+    return $datas;
+  }
+  // récupère toutes les personnes qui ont liké l'utilisateur
+  public function getMatchedUsers($user)
+  {
+    $co = new Db();
+    $db = $co->dbCo("socknnect", "root", "root");
+
+    $sql = "SELECT * FROM `matches` WHERE other_user=? AND like_status = 1";
+    $params = [$user];
+    $datas = $co->SQLWithParam($sql, $params, $db);
+    return $datas;
+  }
+  // récupère tous les matchs
+  public function getMatchesId($userLikes, $userLiked)
+  {
+    $matches = [];
+    foreach ($userLikes as $like) {
+      foreach ($userLiked as $liked) {
+        if ($like['other_user'] === $liked['user']) {
+          $matches[] = $like['other_user'];
+        }
+      }
+    }
+    return $matches;
+  }
+  // récupère les infos des matchs
+  public function getMatchedInfo($id)
+  {
+    $co = new Db();
+    $db = $co->dbCo("socknnect", "root", "root");
+
+    $sql = "SELECT * FROM `user` WHERE id=?";
+    $params = [$id];
+    $datas = $co->SQLWithParam($sql, $params, $db);
+    return $datas;
+  }
 }

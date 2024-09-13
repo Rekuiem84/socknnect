@@ -102,6 +102,7 @@ body {
   background-color: #efd9da;
   margin: 0;
   padding: 0;
+  padding-bottom: 5%;
 }
 
 .form-cont {
@@ -252,6 +253,7 @@ input[type=file] {
   display: grid;
   grid-template-columns: 1fr;
   margin-inline: auto;
+  margin-bottom: 5%;
 }
 .profile-cont > * {
   grid-column: 1;
@@ -366,6 +368,31 @@ input[type=file] {
   background: #fdeddd;
   color: #1e1e1e;
   border: 2px solid #1e1e1e;
+}
+
+.btn-profil {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #262525;
+  color: #ffffff;
+  text-transform: uppercase;
+  border: 2px solid transparent;
+  margin-inline: auto;
+  margin-bottom: 5%;
+  padding: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
+}
+.btn-profil:hover {
+  background: #fdeddd;
+  color: #1e1e1e;
+  border: 2px solid #1e1e1e;
+}
+
+a {
+  text-decoration: none;
 }
 
 .popup {

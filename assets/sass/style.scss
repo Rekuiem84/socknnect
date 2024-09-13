@@ -31,6 +31,7 @@ body {
 	background-color: $bg-color;
 	margin: 0;
 	padding: 0;
+	padding-bottom: 5%;
 }
 .form-cont {
 	width: min(100%, 480px);
@@ -184,6 +185,7 @@ input[type="file"] {
 	display: grid;
 	grid-template-columns: 1fr;
 	margin-inline: auto;
+	margin-bottom: 5%;
 
 	& > * {
 		grid-column: 1;
@@ -304,7 +306,30 @@ input[type="file"] {
 		}
 	}
 }
+.btn-profil {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: $bg-footer;
+		color: $secondary-font-color;
+		text-transform: uppercase;
+		border: 2px solid transparent;
+		margin-inline: auto;
+		margin-bottom: 5%;
+		padding: 1rem;
+		font-size: 1rem;
+		cursor: pointer;
+		transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
+		&:hover {
+			background: $accent-color-1;
+			color: $main-font-color;
+			border: 2px solid #1e1e1e;
+		}
+	}
 
+	a {
+		text-decoration: none;
+	}
 .popup {
 	color: #2a9c6f;
 	position: fixed;

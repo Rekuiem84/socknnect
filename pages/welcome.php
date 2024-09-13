@@ -82,7 +82,7 @@ if ($_SESSION["is_connected"]) :
         <button id="btn-logout">Se déconnecter</button>
       </form>
       <a href="../pages/profil.php">
-        <button>Votre Profil</button>
+        <button class="btn-profil">Votre Profil</button>
       </a>
       <?php
       if (!empty($other_users)) :

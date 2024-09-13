@@ -101,8 +101,7 @@ body {
   font-family: "Poppins", sans-serif;
   background-color: #FEBCCB;
   margin: 0;
-  padding: 0;
-  padding-bottom: 5%;
+  padding-bottom: 5rem;
 }
 
 .form-cont {
@@ -110,6 +109,10 @@ body {
   margin-inline: auto;
   padding: 2rem;
 }
+main {
+  padding-inline: 1.5rem;
+}
+
 input {
   font-family: "Poppins", sans-serif;
 }
@@ -427,6 +430,16 @@ a {
 }
 .matches td img {
   max-width: 300px;
+}
+
+.link-cont {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.link-cont .btn-profil {
+  margin: 0;
 }
 
 /*# sourceMappingURL=style.css.map */

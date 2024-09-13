@@ -73,79 +73,90 @@ if (isset($_GET["success"])) {
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profil de l'utilisateur</title>
     <link rel='stylesheet' href='../assets/style/style.css' />
 </head>
+
 <body>
-<main>
-    <div class="bg-accent-1 window form-cont">
-        <h1>PROFIL</h1>
-        <form method="POST" enctype="multipart/form-data">
-            <div class="input-cont">
-                <label for="nom">Pseudo</label>
-                <input placeholder="nom" id="nom" name="nom" value="<?= ($_SESSION['nom']); ?>"/>
-            </div>
-            <div class="input-cont">
-                <label for="couleur">Couleur</label>
-                <input placeholder="couleur" id="couleur" name="couleur" value="<?= ($_SESSION['couleur']); ?>"/>
-            </div>
-            <div class="input-cont">
-                <label for="taille">Taille</label>
-                <input placeholder="taille" id="taille" name="taille" value="<?= ($_SESSION['taille']); ?>"/>
-            </div>
-            <div class="input-cont">
-                <label for="matiere">Matière</label>
-                <input placeholder="matiere" id="matiere" name="matiere" value="<?= ($_SESSION['matiere']); ?>"/>
-            </div>
-            <div class="input-cont">
-                <label for="motif">Motif</label>
-                <input placeholder="motif" id="motif" name="motif" value="<?= ($_SESSION['motif']); ?>"/>
-            </div>
-            <!-- Afficher la photo actuelle et uploader une nouvelle photo -->
-            <div class="img-cont">
-                <img src="../user_photos/<?= $_SESSION['photo'] ?>" alt="Photo de profil actuelle">
-            </div>
-            <div class="input-cont">
-                <label class="label-photo" for="photo">Modifier ma photo</label>
-                <div class="custom-file">
-                    <input type="file" id="photo" name="photo" accept="image/*">
-                    <label for="photo" class="file-label">Choisir une photo</label>
-                </div>
-            </div>
-            <div class="input-cont">
-                <label for="email">Adresse email</label>
-                <input placeholder="email" id="email" name="email" value="<?= ($_SESSION['email']); ?>"/>
-            </div>
-
-            <button class="btn-submit" type="submit">Modifier mon profil</button>
+    <main>
+        <form method="post" class="deconnexion">
+            <input type="hidden" name="deconnexion" value="true">
+            <button id="btn-logout">Se déconnecter</button>
         </form>
-    </div>
-</main>
+        <div class="link-cont">
+            <a href="../pages/profil.php" class="btn-profil">Votre Profil</a>
+            <a href="../pages/matches.php" class="btn-profil">Matches</a>
+        </div>
+        <div class="bg-accent-1 window form-cont">
+            <h1>PROFIL</h1>
+            <form method="POST" enctype="multipart/form-data">
+                <div class="input-cont">
+                    <label for="nom">Pseudo</label>
+                    <input placeholder="nom" id="nom" name="nom" value="<?= ($_SESSION['nom']); ?>" />
+                </div>
+                <div class="input-cont">
+                    <label for="couleur">Couleur</label>
+                    <input placeholder="couleur" id="couleur" name="couleur" value="<?= ($_SESSION['couleur']); ?>" />
+                </div>
+                <div class="input-cont">
+                    <label for="taille">Taille</label>
+                    <input placeholder="taille" id="taille" name="taille" value="<?= ($_SESSION['taille']); ?>" />
+                </div>
+                <div class="input-cont">
+                    <label for="matiere">Matière</label>
+                    <input placeholder="matiere" id="matiere" name="matiere" value="<?= ($_SESSION['matiere']); ?>" />
+                </div>
+                <div class="input-cont">
+                    <label for="motif">Motif</label>
+                    <input placeholder="motif" id="motif" name="motif" value="<?= ($_SESSION['motif']); ?>" />
+                </div>
+                <!-- Afficher la photo actuelle et uploader une nouvelle photo -->
+                <div class="img-cont">
+                    <img src="../user_photos/<?= $_SESSION['photo'] ?>" alt="Photo de profil actuelle">
+                </div>
+                <div class="input-cont">
+                    <label class="label-photo" for="photo">Modifier ma photo</label>
+                    <div class="custom-file">
+                        <input type="file" id="photo" name="photo" accept="image/*">
+                        <label for="photo" class="file-label">Choisir une photo</label>
+                    </div>
+                </div>
+                <div class="input-cont">
+                    <label for="email">Adresse email</label>
+                    <input placeholder="email" id="email" name="email" value="<?= ($_SESSION['email']); ?>" />
+                </div>
 
-<!-- Script pour prévisualiser la nouvelle image avant soumission -->
-<script>
-    setTimeout(() => {
-        const popup = document.querySelector('.popup');
-        if (popup) {
-            popup.style.display = 'none';  // Masque complètement la popup
-        }
-    }, 2000);  // 2000 millisecondes = 2 secondes  
+                <button class="btn-submit" type="submit">Modifier mon profil</button>
+            </form>
+        </div>
+    </main>
 
-    const image = document.querySelector('.img-cont img');
-    const photoInput = document.getElementById('photo');
-    photoInput.addEventListener('change', function() {
-        const file = this.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                image.setAttribute('src', event.target.result);
+    <!-- Script pour prévisualiser la nouvelle image avant soumission -->
+    <script>
+        setTimeout(() => {
+            const popup = document.querySelector('.popup');
+            if (popup) {
+                popup.style.display = 'none'; // Masque complètement la popup
             }
-            reader.readAsDataURL(file);
-        }
-    });
-</script>
+        }, 2000); // 2000 millisecondes = 2 secondes  
+
+        const image = document.querySelector('.img-cont img');
+        const photoInput = document.getElementById('photo');
+        photoInput.addEventListener('change', function() {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    image.setAttribute('src', event.target.result);
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
 </body>
+
 </html>

@@ -52,38 +52,48 @@ if ($_SESSION["is_connected"]) :
 
     $likedUsers = $user->getLikedUsers($id);
     ?>
-    <table class="matches">
-      <thead>
-        <tr>
-          <th>Nom</th>
-          <th>Email</th>
-          <th>Couleur</th>
-          <th>Taille</th>
-          <th>Matière</th>
-          <th>Motif</th>
-          <th>Photo</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php
-        foreach ($likedUsers as $likes) {
-          $likedBy = $user->getMatchedUsers($id);
-        }
-        $matchesId = $user->getMatchesId($likedUsers, $likedBy);
-        foreach ($matchesId as $matchId):
-          $matchesInfo = $user->getMatchedInfo($matchId);
-        ?>
+    <main>
+      <form method="post" class="deconnexion">
+        <input type="hidden" name="deconnexion" value="true">
+        <button id="btn-logout">Se déconnecter</button>
+      </form>
+      <div class="link-cont">
+        <a href="../pages/profil.php" class="btn-profil">Votre Profil</a>
+        <a href="../pages/matches.php" class="btn-profil">Matches</a>
+      </div>
+      <table class="matches">
+        <thead>
           <tr>
-            <td><?= $matchesInfo[0]["nom"] ?></td>
-            <td><?= $matchesInfo[0]["email"] ?></td>
-            <td><?= $matchesInfo[0]["couleur"] ?></td>
-            <td><?= $matchesInfo[0]["taille"] ?></td>
-            <td><?= $matchesInfo[0]["matiere"] ?></td>
-            <td><?= $matchesInfo[0]["motif"] ?></td>
-            <td><img src="../user_photos/<?= $matchesInfo[0]["photo"] ?>" alt="photo de l'utilisateur"></td>
+            <th>Nom</th>
+            <th>Email</th>
+            <th>Couleur</th>
+            <th>Taille</th>
+            <th>Matière</th>
+            <th>Motif</th>
+            <th>Photo</th>
           </tr>
-        <?php endforeach; ?>
-    </table>
+        </thead>
+        <tbody>
+          <?php
+          foreach ($likedUsers as $likes) {
+            $likedBy = $user->getMatchedUsers($id);
+          }
+          $matchesId = $user->getMatchesId($likedUsers, $likedBy);
+          foreach ($matchesId as $matchId):
+            $matchesInfo = $user->getMatchedInfo($matchId);
+          ?>
+            <tr>
+              <td><?= $matchesInfo[0]["nom"] ?></td>
+              <td><?= $matchesInfo[0]["email"] ?></td>
+              <td><?= $matchesInfo[0]["couleur"] ?></td>
+              <td><?= $matchesInfo[0]["taille"] ?></td>
+              <td><?= $matchesInfo[0]["matiere"] ?></td>
+              <td><?= $matchesInfo[0]["motif"] ?></td>
+              <td><img src="../user_photos/<?= $matchesInfo[0]["photo"] ?>" alt="photo de l'utilisateur"></td>
+            </tr>
+          <?php endforeach; ?>
+      </table>
+    </main>
   </body>
 
   </html>

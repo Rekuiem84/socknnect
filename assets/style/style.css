@@ -416,5 +416,17 @@ a {
     display: none;
   }
 }
+.matches {
+  border-collapse: collapse;
+}
+.matches td {
+  min-width: 10ch;
+  border: 2px solid black;
+  text-align: center;
+  padding-inline: 1rem;
+}
+.matches td img {
+  max-width: 300px;
+}
 
 /*# sourceMappingURL=style.css.map */

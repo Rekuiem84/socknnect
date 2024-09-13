@@ -351,3 +351,15 @@ input[type="file"] {
 		display: none;
 	}
 }
+.matches {
+	border-collapse: collapse;
+	td {
+		min-width: 10ch;
+		border: 2px solid black;
+		text-align: center;
+		padding-inline: 1rem;
+		img {
+			max-width: 300px;
+		}
+	}
+}

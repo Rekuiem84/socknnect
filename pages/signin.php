@@ -125,8 +125,8 @@ $message = "";
           <img src="" alt="Prévisualisation de l'image" id="imagePreview">
         </div>
         <div class="input-cont">
-          <label for="email">Adresse email</label>
-          <input type="email" name="email" id="email" placeholder="email" required>
+          <label for="email">Adresse Email</label>
+          <input type="email" name="email" id="email" placeholder="Email" required>
         </div>
         <button class="btn-submit" type="submit">Créer mon compte</button>
       </form>

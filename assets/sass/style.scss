@@ -101,13 +101,31 @@ button {
 		}
 	}
 	input {
-		background: none;
-		border: 3px solid transparent;
-		border-bottom-color: black;
+		width: 100%;
+		padding: 10px 0;
+		font-size: 16px;
+		color: #000000;
+		margin-bottom: 5px;
+		border: none;
+		border-bottom: 1px solid #000000;
+		outline: none;
+		background: transparent;
 		&:focus {
 			outline: none;
 			border-color: black;
 		}
+
+		label {
+			position: absolute;
+			top: 0;
+			left: 0;
+			padding: 10px 0;
+			font-size: 16px;
+			color: #fff;
+			pointer-events: none;
+			transition: .5s;
+		}
+		
 	}
 	.btn-submit {
 		background: $bg-footer;

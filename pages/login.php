@@ -74,11 +74,11 @@ $message = "";
       <form method="post">
         <div class="input-cont">
           <label for="email">Email</label>
-          <input type="email" name="email" id="email" placeholder="email" required>
+          <input type="email" name="email" id="email" placeholder="Email" required>
         </div>
         <div class="input-cont">
           <label for="password">Mot de passe</label>
-          <input type="password" name="password" id="password" placeholder="mot de passe" required>
+          <input type="password" name="password" id="password" placeholder="Mot de passe" required>
         </div>
         <button class="btn-submit type=" submit">Sock in !</button>
       </form>

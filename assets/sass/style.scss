@@ -248,6 +248,9 @@ input[type="file"] {
         }
     }
 }
+.profile-empty p:only-child {
+    margin-bottom: 0;
+}
 
 .deconnexion {
     display: flex;

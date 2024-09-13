@@ -30,6 +30,7 @@ $message = "";
 
 
   if ($form->isSubmitted()) {
+    var_dump($_FILES);
 
     $nom = $_POST["nom"];
     $email = $_POST["email"];
@@ -38,23 +39,47 @@ $message = "";
     $taille = $_POST["taille"];
     $matiere = $_POST["matiere"];
     $motif = $_POST["motif"];
-    $photo = $_POST["photo"];
+    $photo = $_FILES["photo"];
+
+    // Gérer le téléchargement de la photo
+    if (isset($photo) && $photo['error'] === UPLOAD_ERR_OK) {
+      $photoTmpPath = $photo['tmp_name'];
+      $photoName = $photo['name'];
+      $photoNameCmps = explode(".", $photoName);
+      $photoExtension = strtolower(end($photoNameCmps));
+    } else {
+      $errors[] = 'Erreur lors du téléchargement de la photo.';
+    }
 
     if ($form->isValidUser()) {
+      var_dump("ok");
       $user = new user($nom, $email, $password, $couleur, $taille, $matiere, $motif, $photo);
 
       $user->insertUser($nom, $email, $password, $couleur, $taille, $matiere, $motif, $photo);
 
       // Création des paires avec tous les autres utilisateurs
       $id = $user->getLastId();
-      foreach ($user->getAllIdExceptLast() as $value) {
-        $other_user_id = $value[0];
-        $user->createPair($id, $other_user_id);
-      }
 
-      header("Location: ./login.php?success");
-    } else {
-      $errors = $form->getErrorsUser();
+      // Renommer la photo avec le nom original suivi de l'ID de l'utilisateur
+      $newPhotoName = pathinfo($photoName, PATHINFO_FILENAME) . "-" . $id . '.' . $photoExtension;
+      $uploadFileDir = '../user_photos/';
+      $dest_path = $uploadFileDir . $newPhotoName;
+
+      if (move_uploaded_file($photoTmpPath, $dest_path)) {
+        $photo = $newPhotoName;
+
+        // Mettre à jour l'utilisateur avec le nom de la photo
+        $user->updateUserPhoto($id, $photo);
+
+        foreach ($user->getAllIdExceptLast() as $value) {
+          $other_user_id = $value[0];
+          $user->createPair($id, $other_user_id);
+        }
+
+        header("Location: ./login.php?success");
+      } else {
+        $errors = $form->getErrorsUser();
+      }
     }
   }
   $page = "signin";
@@ -62,7 +87,8 @@ $message = "";
   <main>
     <div class="bg-accent-1 window form-cont">
       <h1>INSCRIPTION</h1>
-      <form method="post">
+      <form method="post" enctype='multipart/form-data'>
+
         <div class="input-cont">
           <label for="nom">Pseudo</label>
           <input type="text" name="nom" id="nom" placeholder="Pseudo" required>

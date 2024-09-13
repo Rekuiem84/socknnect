@@ -53,7 +53,7 @@ class Form
 
     public function isValidUser()
     {
-        return (!empty($_POST["nom"]) && !empty($_POST["email"]) && !empty($_POST["password"]) && !empty($_POST["couleur"]) && !empty($_POST["taille"]) && !empty($_POST["matiere"]) && !empty($_POST["motif"]) && !empty($_POST["photo"]));
+        return (!empty($_POST["nom"]) && !empty($_POST["email"]) && !empty($_POST["password"]) && !empty($_POST["couleur"]) && !empty($_POST["taille"]) && !empty($_POST["matiere"]) && !empty($_POST["motif"]) && !empty($_FILES["photo"]));
     }
 
     public function getErrorsUser()

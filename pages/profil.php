@@ -99,6 +99,15 @@ echo "<p class='popup'>Profil mis à jour avec succès</p>";
     </div>
 </main>
 <script>
+
+// Utilisation de setTimeout pour masquer la popup après 5 secondes
+setTimeout(() => {
+        const popup = document.querySelector('.popup');
+        if (popup) {
+            popup.style.display = 'none';  // Masque complètement la popup
+        }
+    }, 2000); // 5000 millisecondes = 5 secondes  
+
     const image = document.querySelector('.img-cont img');
     const photoInput = document.getElementById('photo');
     photoInput.addEventListener('change', function() {
@@ -111,14 +120,8 @@ echo "<p class='popup'>Profil mis à jour avec succès</p>";
         reader.readAsDataURL(file);
       }
     });
-
-    // Utilisation de setTimeout pour masquer la popup après 5 secondes
-    setTimeout(() => {
-        const popup = document.querySelector('.popup');
-        if (popup) {
-            popup.style.display = 'none';  // Masque complètement la popup
-        }
-    }, 5000); // 5000 millisecondes = 5 secondes
+    
+    
   </script>
 </body>
 </html>

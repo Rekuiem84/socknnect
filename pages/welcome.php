@@ -50,19 +50,26 @@ if ($_SESSION["is_connected"]) :
     $page = "welcome";
     include "../include/header.php";
 
-    // toutes les paires qui n'ont pas été liké par l'utilisateur
-    $unlikedMatches = $user->getUnlikedUsers($id);
-    foreach ($unlikedMatches as $value) {
-      // tous les utilisateurs qui n'ont pas été liké
-      $unlikedMatchesId[] = $value["id"];
-      $unlikedUsers[] = $value["user1"];
-    }
+    $unseenMatches = $user->getUnseenMatches($id);
 
-    foreach ($unlikedUsers as $value) {
-      var_dump($value);
-      var_dump($user->getUser($value));
-      echo "<br>";
-      echo "<br>";
+    foreach ($unseenMatches as $match) {
+      $other_user_id = $match["other_user"];
+      $other_users[] = $user->getUser($other_user_id);
+    }
+    // var_dump($other_users[0][0]["photo"]);
+    if (!empty($other_users)) {
+
+      if ($form->isSubmitted()) {
+        if (isset($_POST["action"])) {
+          $action = $_POST["action"];
+          if ($action == "like") {
+            $user->likeUser($id, $other_users[0][0]["id"]);
+          } else {
+            $user->skipUser($id, $other_users[0][0]["id"]);
+          }
+          array_shift($other_users);
+        }
+      }
     }
 
 
@@ -74,28 +81,43 @@ if ($_SESSION["is_connected"]) :
         <input type="hidden" name="deconnexion" value="true">
         <button id="btn-logout">Se déconnecter</button>
       </form>
-      <div class="profile-cont window">
-        <div class="img-cont"><img src="../user_photos/sock-3.webp" alt=""></div>
-        <div class="infos-cont">
-          <p class="infos__name"><?= $_SESSION["nom"] ?></p>
-          <div class="infos-tags">
-            <span class="tag--couleur"><?= $_SESSION["couleur"] ?></span>
-            <span class="tag--taille"><?= $_SESSION["taille"] ?></span>
-            <span class="tag--matiere"><?= $_SESSION["matiere"] ?></span>
-            <span class="tag--motif"><?= $_SESSION["motif"] ?></span>
+      <a href="../pages/profil.php">
+        <button>Votre Profil</button>
+      </a>
+      <?php
+      if (!empty($other_users)) :
+      ?>
+        <div class="profile-cont window">
+          <div class="img-cont"><img src="../user_photos/<?= $other_users[0][0]["photo"] ?>" alt=""></div>
+          <div class="infos-cont">
+            <p class="infos__name"><?= $other_users[0][0]["nom"] ?></p>
+            <div class="infos-tags">
+              <span class="tag--couleur"><?= $other_users[0][0]["couleur"] ?></span>
+              <span class="tag--taille"><?= $other_users[0][0]["taille"] ?></span>
+              <span class="tag--matiere"><?= $other_users[0][0]["matiere"] ?></span>
+              <span class="tag--motif"><?= $other_users[0][0]["motif"] ?></span>
+            </div>
+          </div>
+          <div class="actions-cont">
+            <form method="post">
+              <input type="hidden" name="action" value="skip">
+              <button type="submit" class="btn--skip">X</button>
+            </form>
+            <form method="post">
+              <input type="hidden" name="action" value="like">
+              <button type="submit" class="btn--like">O</button>
+            </form>
           </div>
         </div>
-        <div class="actions-cont">
-          <form method="post">
-            <input type="hidden" name="action" value="skip">
-            <button type="submit" class="btn--skip">X</button>
-          </form>
-          <form method="post">
-            <input type="hidden" name="action" value="like">
-            <button type="submit" class="btn--like">O</button>
-          </form>
+      <?php
+      else :
+      ?>
+        <div class="profile-cont window profile-empty">
+          <p>Il n'y a plus de profils à voir, gros charo</p>
         </div>
-      </div>
+      <?php
+      endif;
+      ?>
     </main>
   </body>
 

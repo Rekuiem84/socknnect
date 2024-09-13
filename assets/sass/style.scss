@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 $bg-color: #efd9da;
 $bg-footer: #262525;
@@ -30,8 +30,7 @@ body {
 	font-family: "Poppins", sans-serif;
 	background-color: $bg-color;
 	margin: 0;
-	padding: 0;
-	padding-bottom: 5%;
+	padding-bottom: 5rem;
 }
 .form-cont {
 	width: min(100%, 480px);
@@ -40,8 +39,10 @@ body {
 	@media (max-width: 768px) {
 	}
 }
-
-input{
+main {
+	padding-inline: 1.5rem;
+}
+input {
 	font-family: "Poppins", sans-serif;
 }
 
@@ -124,9 +125,8 @@ button {
 			font-size: 16px;
 			color: #fff;
 			pointer-events: none;
-			transition: .5s;
+			transition: 0.5s;
 		}
-		
 	}
 	.btn-submit {
 		background: $bg-footer;
@@ -307,29 +307,29 @@ input[type="file"] {
 	}
 }
 .btn-profil {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		background: $bg-footer;
-		color: $secondary-font-color;
-		text-transform: uppercase;
-		border: 2px solid transparent;
-		margin-inline: auto;
-		margin-bottom: 5%;
-		padding: 1rem;
-		font-size: 1rem;
-		cursor: pointer;
-		transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
-		&:hover {
-			background: $accent-color-1;
-			color: $main-font-color;
-			border: 2px solid #1e1e1e;
-		}
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: $bg-footer;
+	color: $secondary-font-color;
+	text-transform: uppercase;
+	border: 2px solid transparent;
+	margin-inline: auto;
+	margin-bottom: 5%;
+	padding: 1rem;
+	font-size: 1rem;
+	cursor: pointer;
+	transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
+	&:hover {
+		background: $accent-color-1;
+		color: $main-font-color;
+		border: 2px solid #1e1e1e;
 	}
+}
 
-	a {
-		text-decoration: none;
-	}
+a {
+	text-decoration: none;
+}
 .popup {
 	color: #2a9c6f;
 	position: fixed;
@@ -361,5 +361,15 @@ input[type="file"] {
 		img {
 			max-width: 300px;
 		}
+	}
+}
+.link-cont {
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+	margin-bottom: 2rem;
+
+	.btn-profil {
+		margin: 0;
 	}
 }

@@ -81,9 +81,11 @@ if ($_SESSION["is_connected"]) :
         <input type="hidden" name="deconnexion" value="true">
         <button id="btn-logout">Se déconnecter</button>
       </form>
-      <a href="../pages/profil.php">
-        <button class="btn-profil">Votre Profil</button>
-      </a>
+      <div class="link-cont">
+        <a href="../pages/profil.php" class="btn-profil">Votre Profil</a>
+        <a href="../pages/matches.php" class="btn-profil">Matches</a>
+      </div>
+
       <?php
       if (!empty($other_users)) :
       ?>
@@ -113,7 +115,7 @@ if ($_SESSION["is_connected"]) :
       else :
       ?>
         <div class="profile-cont window profile-empty">
-          <p>Il n'y a plus de profils à voir, gros charo</p>
+          <p>Il n'y a plus de profils à voir</p>
         </div>
       <?php
       endif;

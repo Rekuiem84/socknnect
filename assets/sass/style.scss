@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 $bg-color: #efd9da;
 $bg-footer: #262525;
 $main-font-color: #1e1e1e;
@@ -5,7 +7,7 @@ $secondary-font-color: #ffffff;
 
 $accent-color-1: #fdeddd;
 $accent-color-2: #f3e7e7;
-$font-stack: Arial, sans-serif;
+$font-stack: "Poppins", sans-serif;
 
 @import "header";
 @import "home-card";
@@ -25,7 +27,7 @@ button {
 	cursor: pointer;
 }
 body {
-	font-family: $font-stack;
+	font-family: "Poppins", sans-serif;
 	background-color: $bg-color;
 	margin: 0;
 	padding: 0;
@@ -36,6 +38,15 @@ body {
 	padding: 2rem;
 	@media (max-width: 768px) {
 	}
+}
+
+input{
+	font-family: "Poppins", sans-serif;
+}
+
+button {
+	font-family: "Poppins", sans-serif;
+	font-weight: bold;
 }
 
 .bg-accent-1 {
@@ -90,13 +101,31 @@ body {
 		}
 	}
 	input {
-		background: none;
-		border: 3px solid transparent;
-		border-bottom-color: black;
+		width: 100%;
+		padding: 10px 0;
+		font-size: 16px;
+		color: #000000;
+		margin-bottom: 5px;
+		border: none;
+		border-bottom: 1px solid #000000;
+		outline: none;
+		background: transparent;
 		&:focus {
 			outline: none;
 			border-color: black;
 		}
+
+		label {
+			position: absolute;
+			top: 0;
+			left: 0;
+			padding: 10px 0;
+			font-size: 16px;
+			color: #fff;
+			pointer-events: none;
+			transition: .5s;
+		}
+		
 	}
 	.btn-submit {
 		background: $bg-footer;
@@ -295,5 +324,17 @@ input[type="file"] {
 @keyframes popup {
 	100% {
 		display: none;
+	}
+}
+.matches {
+	border-collapse: collapse;
+	td {
+		min-width: 10ch;
+		border: 2px solid black;
+		text-align: center;
+		padding-inline: 1rem;
+		img {
+			max-width: 300px;
+		}
 	}
 }

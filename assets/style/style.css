@@ -291,16 +291,18 @@ input[type=file] {
 .profile-cont .actions-cont button.btn--skip {
   color: red;
 }
-.profile-cont .actions-cont button.btn--skip:hover {
+.profile-cont .actions-cont button.btn--skip:is(:hover, :focus-visible) {
   background: red;
   color: white;
+  outline: none;
 }
 .profile-cont .actions-cont button.btn--like {
   color: green;
 }
-.profile-cont .actions-cont button.btn--like:hover {
+.profile-cont .actions-cont button.btn--like:is(:hover, :focus-visible) {
   background: green;
   color: white;
+  outline: none;
 }
 
 .profile-empty p:only-child {
